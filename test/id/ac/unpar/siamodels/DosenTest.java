@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SIAModels.src.main.java.id.ac.unpar.siamodels;
+package id.ac.unpar.siamodels;
 
 import id.ac.unpar.siamodels.Dosen;
 import org.junit.After;
