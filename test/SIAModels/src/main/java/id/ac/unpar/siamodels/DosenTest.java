@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package id.ac.unpar.siamodels;
+package SIAModels.src.main.java.id.ac.unpar.siamodels;
 
+import id.ac.unpar.siamodels.Dosen;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Muhammad Ravi
+ * @author asus a455l
  */
 public class DosenTest {
     
@@ -43,26 +44,23 @@ public class DosenTest {
     @Test
     public void testGetNik() {
         System.out.println("getNik");
-        Dosen instance = new Dosen("2016730041", "ravi");
-        String expResult = "2016730041";
+        Dosen instance = new Dosen("12345678","A");
+        String expResult = "12345678";
         String result = instance.getNik();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
     }
 
     /**
      * Test of setNik method, of class Dosen.
      */
-//    @Test
-//    public void testSetNik() {
-//        System.out.println("setNik");
-//        String nik = "";
-//        Dosen instance = null;
-//        instance.setNik(nik);
-//        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testSetNik() {
+        System.out.println("setNik");
+        String nik = "12345678";
+        Dosen instance = new Dosen("23456789", "B");
+        instance.setNik(nik);
+        assertEquals(nik, instance.getNik());
+    }
 
     /**
      * Test of getNama method, of class Dosen.
@@ -70,40 +68,35 @@ public class DosenTest {
     @Test
     public void testGetNama() {
         System.out.println("getNama");
-        Dosen instance = new Dosen("2016730041", "ravi");
-        String expResult = "ravi";
+        Dosen instance = new Dosen("123","ABC");
+        String expResult = "ABC";
         String result = instance.getNama();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
     }
 
-//    /**
-//     * Test of setNama method, of class Dosen.
-//     */
-//    @Test
-//    public void testSetNama() {
-//        System.out.println("setNama");
-//        String nama = "";
-//        Dosen instance = null;
-//        instance.setNama(nama);
-//        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of equals method, of class Dosen.
-//     */
-//    @Test
-//    public void testEquals() {
-//        System.out.println("equals");
-//        Object obj = null;
-//        Dosen instance = null;
-//        boolean expResult = false;
-//        boolean result = instance.equals(obj);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of setNama method, of class Dosen.
+     */
+    @Test
+    public void testSetNama() {
+        System.out.println("setNama");
+        String nama = "ABCD";
+        Dosen instance = new Dosen("12345678","BCDE");
+        instance.setNama(nama);
+        assertEquals(nama, instance.getNama());
+    }
+
+    /**
+     * Test of equals method, of class Dosen.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object obj = new Dosen("12345678", "ABC");
+        Dosen instance = new Dosen("12345678", "ABC");
+        boolean expResult = true;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+    }
     
 }
