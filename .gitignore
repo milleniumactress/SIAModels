@@ -19,6 +19,10 @@ hs_err_pid*
 target/
 /.project
 /.classpath
+/SIAModels (NB ver.)/nbproject/private/
+/SIAModels (NetBeans ver.)/nbproject/private/
+/JUnit v4.10 (TEST)/nbproject/private/
+/JUnit v4.10 (TEST)/build/
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
