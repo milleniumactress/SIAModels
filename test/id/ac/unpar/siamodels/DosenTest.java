@@ -99,4 +99,29 @@ public class DosenTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of equals method, of class Dosen.
+     */
+    @Test
+    public void testEquals2() {
+        System.out.println("equals");
+        Object obj = null;
+        Dosen instance = new Dosen("12345678", "ABC");
+        boolean expResult = false;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of equals method, of class Dosen.
+     */
+    @Test
+    public void testEquals3() {
+        System.out.println("equals");
+        Object obj = null;
+        Dosen instance = new Dosen("12345678", "ABC");
+        boolean expResult = false;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+    }
 }

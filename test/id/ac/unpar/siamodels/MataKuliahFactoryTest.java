@@ -40,17 +40,16 @@ public class MataKuliahFactoryTest {
     public void tearDown() {
     }
 
-//    /**
-//     * Test of getInstance method, of class MataKuliahFactory.
-//     */
-//    @Test
-//    public void testGetInstance() {
-//        System.out.println("getInstance");
-//        MataKuliahFactory instance = MataKuliahFactory.getInstance();
-//        MataKuliahFactory expResult = instance;
-//        MataKuliahFactory result = MataKuliahFactory.getInstance();
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of getInstance method, of class MataKuliahFactory.
+     */
+    @Test
+    public void testGetInstance() {
+        System.out.println("getInstance");
+        MataKuliahFactory expResult = MataKuliahFactory.getInstance();
+        MataKuliahFactory result = MataKuliahFactory.getInstance();
+        assertEquals(expResult, result);
+    }
 
     /**
      * Test of createMataKuliah method, of class MataKuliahFactory.
