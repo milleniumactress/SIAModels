@@ -13,6 +13,9 @@ import id.ac.unpar.siamodels.matakuliah.AIF105;
 import id.ac.unpar.siamodels.matakuliah.AIF106;
 import id.ac.unpar.siamodels.matakuliah.AIF181;
 import id.ac.unpar.siamodels.matakuliah.AIF201;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131101;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131102;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131105;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -56,7 +59,7 @@ public class MahasiswaTest {
         System.out.println("calculateIPTempuh");
         boolean lulusSaja = true;
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(), 'A', 70.0, 70.0, 70.0, 'B'));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
         double expResult = 3.0;
         double result = instance.calculateIPTempuh(lulusSaja);
         assertEquals(expResult, result, 0.0);
@@ -70,9 +73,9 @@ public class MahasiswaTest {
     public void testCalculateIPKumulatif() {
         System.out.println("calculateIPKumulatif");
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(), 'A', 70.0, 70.0, 70.0, 'B'));
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF102(), 'A', 90.0, 90.0, 90.0, 'A'));
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF103(), 'A', 67.0, 68.0, 66.0, 'C'));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "C"));//3
         double expResult = 40.0 / 13.0;
         double result = instance.calculateIPKumulatif();
         assertEquals(expResult, result, 0.0);
@@ -86,9 +89,9 @@ public class MahasiswaTest {
     public void testCalculateIPS() {
         System.out.println("calculateIPS");
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(), 'A', 90.0, 90.0, 90.0, 'A'));//6
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF102(), 'A', 70.0, 70.0, 70.0, 'B'));//4
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF104(), 'A', 70.0, 70.0, 70.0, 'C'));//3
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "C"));//3
         double expResult = 42.0 / 13.0;
         double result = instance.calculateIPS();
         assertEquals(expResult, result, 0.0);
@@ -102,12 +105,9 @@ public class MahasiswaTest {
     public void testCalculateSKSLulus() {
         System.out.println("calculateSKSLulus");
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(), 'A', 90.0, 90.0, 90.0, 'A'));//6
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF102(), 'A', 70.0, 70.0, 70.0, 'B'));//4
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF104(), 'A', 70.0, 70.0, 70.0, 'C'));//3
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF105(), 'A', 90.0, 90.0, 90.0, 'E'));//3
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF106(), 'A', 70.0, 70.0, 70.0, 'E'));//3
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF201(), 'A', 70.0, 70.0, 70.0, 'E'));//4
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "C"));//3
         int expResult = 13;
         int result = instance.calculateSKSLulus();
         assertEquals(expResult, result);
@@ -122,12 +122,9 @@ public class MahasiswaTest {
         System.out.println("calculateSKSTempuh");
         boolean lulusSaja = false;
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(), 'A', 90.0, 90.0, 90.0, 'A'));//6
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF102(), 'A', 70.0, 70.0, 70.0, 'B'));//4
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF104(), 'A', 70.0, 70.0, 70.0, 'C'));//3
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF105(), 'A', 90.0, 90.0, 90.0, 'E'));//3
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF106(), 'A', 70.0, 70.0, 70.0, 'E'));//3
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF201(), 'A', 70.0, 70.0, 70.0, 'E'));//4
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "C"));//3
         int expResult = 23;
         int result = instance.calculateSKSTempuh(lulusSaja);
         assertEquals(expResult, result);
@@ -142,7 +139,7 @@ public class MahasiswaTest {
         System.out.println("calculateTahunSemesterAktif");
         Mahasiswa instance = new Mahasiswa("2016730041");
         TahunSemester tahunSemester=new TahunSemester("161");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(tahunSemester, new AIF101(), 'A', 90.0, 90.0, 90.0, 'A'));//6 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(tahunSemester, new AIF131101(),"A"));//6 
         Set<TahunSemester> expResult = new TreeSet<TahunSemester>();
         expResult.add(tahunSemester);
         Set<TahunSemester> result = instance.calculateTahunSemesterAktif();
@@ -158,7 +155,7 @@ public class MahasiswaTest {
         System.out.println("hasLulusKuliah");
         String kodeMataKuliah = "AIF101";
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(), 'A', 90.0, 90.0, 90.0, 'E'));//6 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(),"E"));//6 
         boolean expResult = false;
         boolean result = instance.hasLulusKuliah(kodeMataKuliah);
         assertEquals(expResult, result);
@@ -173,7 +170,7 @@ public class MahasiswaTest {
         System.out.println("hasTempuhKuliah");
         String kodeMataKuliah = "AIF102";
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(), 'A', 90.0, 90.0, 90.0, 'A'));//6 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(),"A"));//6 
         boolean expResult = false;
         boolean result = instance.hasTempuhKuliah(kodeMataKuliah);
         assertEquals(expResult, result);
