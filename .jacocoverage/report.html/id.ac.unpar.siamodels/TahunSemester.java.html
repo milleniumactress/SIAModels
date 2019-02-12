@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TahunSemester.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Project&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">id.ac.unpar.siamodels</a> &gt; <span class="el_source">TahunSemester.java</span></div><h1>TahunSemester.java</h1><pre class="source lang-java linenums">package id.ac.unpar.siamodels;
+
+/**
+ * Menyimpan konstanta untuk semester beserta tahunnya di UNPAR.
+ *
+ * @author pascal
+ *
+ */
+public final class TahunSemester implements Comparable&lt;TahunSemester&gt; {
+
+    /**
+     * Kode semester 3 dijit, sesuai DPS:
+     * &lt;ul&gt;
+     * &lt;li&gt;2 dijit pertama berupa tahun, 2 dijit terakhir&lt;/li&gt;
+     * &lt;li&gt;dijit terakhir: 1 untuk ganjil, 2 untuk genap, 4 untuk pendek.
+     * &lt;/ul&gt;
+     */
+    private String kodeTahunSemester;
+
+<span class="fc" id="L20">    public TahunSemester(String kodeTahunSemester) throws IllegalArgumentException {</span>
+<span class="fc" id="L21">        validateKodeSemester(kodeTahunSemester);</span>
+<span class="fc" id="L22">        this.kodeTahunSemester = kodeTahunSemester;</span>
+<span class="fc" id="L23">    }</span>
+
+<span class="nc" id="L25">    public TahunSemester(int tahun, Semester semester) throws IllegalArgumentException {</span>
+<span class="nc" id="L26">        char kodeSemester = '\0';</span>
+<span class="nc bnc" id="L27" title="All 6 branches missed.">        switch (semester) {</span>
+            case GANJIL:
+<span class="nc" id="L29">                kodeSemester = '1';</span>
+<span class="nc" id="L30">                break;</span>
+            case GENAP:
+<span class="nc" id="L32">                kodeSemester = '2';</span>
+<span class="nc" id="L33">                break;</span>
+            case PENDEK:
+<span class="nc" id="L35">                kodeSemester = '4';</span>
+<span class="nc" id="L36">                break;</span>
+            case UNKNOWN5:
+<span class="nc" id="L38">                kodeSemester = '5';</span>
+<span class="nc" id="L39">                break;</span>
+            case TRANSFER:
+<span class="nc" id="L41">                kodeSemester = '6';</span>
+<span class="nc" id="L42">                break;</span>
+            default:
+<span class="nc" id="L44">                throw new InternalError(&quot;Incomplete TahunSemester switch case&quot;);</span>
+        }
+<span class="nc" id="L46">        String kodeTahunSemester = (&quot;&quot; + tahun).substring(2, 4) + kodeSemester;</span>
+<span class="nc" id="L47">        validateKodeSemester(kodeTahunSemester);</span>
+<span class="nc" id="L48">        this.kodeTahunSemester = kodeTahunSemester;</span>
+<span class="nc" id="L49">    }</span>
+
+    public Semester getSemester() {
+<span class="pc bpc" id="L52" title="5 of 6 branches missed.">        switch (kodeTahunSemester.charAt(2)) {</span>
+            case '1':
+<span class="fc" id="L54">                return Semester.GANJIL;</span>
+            case '2':
+<span class="nc" id="L56">                return Semester.GENAP;</span>
+            case '4':
+<span class="nc" id="L58">                return Semester.PENDEK;</span>
+            case '5':
+<span class="nc" id="L60">                return Semester.UNKNOWN5;</span>
+            case '6':
+<span class="nc" id="L62">                return Semester.TRANSFER;</span>
+        }
+<span class="nc" id="L64">        return null;</span>
+    }
+
+    public int getTahun() {
+<span class="fc" id="L68">        return 2000 + Integer.parseInt(kodeTahunSemester.substring(0, 2));</span>
+    }
+
+    private static void validateKodeSemester(String kodeTahunSemester) throws IllegalArgumentException {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (!kodeTahunSemester.matches(&quot;[0-9][0-9][12456]&quot;)) {</span>
+<span class="nc" id="L73">            throw new IllegalArgumentException(&quot;Kode semester tidak valid: &quot; + kodeTahunSemester);</span>
+        }
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Mendapatkan kode tahun/semester sesuai aturan di DPS.
+     *
+     * @return kode tahun/semester sesuai aturan di DPS.
+     */
+    public String getKodeDPS() {
+<span class="fc" id="L83">        return kodeTahunSemester;</span>
+    }
+
+    @Override
+    public int compareTo(TahunSemester o) {
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (this.getTahun() &lt; o.getTahun()) {</span>
+<span class="nc" id="L89">            return -1;</span>
+        }
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (this.getTahun() &gt; o.getTahun()) {</span>
+<span class="fc" id="L92">            return +1;</span>
+        }
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (this.getSemester().getOrder() &lt; o.getSemester().getOrder()) {</span>
+<span class="nc" id="L95">            return -1;</span>
+        }
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if (this.getSemester().getOrder() &gt; o.getSemester().getOrder()) {</span>
+<span class="nc" id="L98">            return +1;</span>
+        }
+<span class="fc" id="L100">        return 0;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (!(obj instanceof TahunSemester)) {</span>
+<span class="nc" id="L106">            return false;</span>
+        }
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        return this.compareTo((TahunSemester) obj) == 0;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L113">        return &quot;TahunSemester [&quot; + getTahun() + &quot;/&quot; + getSemester() + &quot;]&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
