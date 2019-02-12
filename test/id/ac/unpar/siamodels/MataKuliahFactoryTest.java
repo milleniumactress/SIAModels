@@ -35,22 +35,22 @@ public class MataKuliahFactoryTest {
      */
     @Test
     public void testCreateMataKuliah_3args() {
-        String kode = "AIF152";
+        String kode = "AIF131101";
         int sks = 3;
         String nama = "abcdef";
         MataKuliahFactory instance = MataKuliahFactory.getInstance();
         MataKuliah result = instance.createMataKuliah(kode, sks, nama);
-        MataKuliah expResult = instance.createMataKuliah("AIF152");
+        MataKuliah expResult = instance.createMataKuliah("AIF131101");
         assertEquals(expResult, result);
     }
 
     /**
      * Test of createMataKuliah method, of class MataKuliahFactory.
      */
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testCreateMataKuliah_String() {
-        String expResult = "AIF101";
-        String kode = "AIF101";
+        String expResult = "AIF131101";
+        String kode = "AIF131101";
         MataKuliahFactory instance = MataKuliahFactory.getInstance();
         MataKuliah mk = instance.createMataKuliah(kode);
         String result = mk.getKode();
