@@ -18,8 +18,6 @@ import static org.junit.Assert.*;
  * @author asus a455l
  */
 public class DosenTest {
-<<<<<<< HEAD
-=======
     /**
      * Test of constuctor, of class Dosen.
      */
@@ -34,7 +32,6 @@ public class DosenTest {
         boolean result = instance.equals(instance4);
         assertEquals(expResult, result);
     }
->>>>>>> frank
 
     /**
      * Test of getNik method, of class Dosen.
