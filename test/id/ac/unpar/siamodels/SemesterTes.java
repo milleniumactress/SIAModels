@@ -17,26 +17,6 @@ import static org.junit.Assert.*;
  * @author i16050
  */
 public class SemesterTes {
-
-    public SemesterTes() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of values method, of class Semester.
      */
