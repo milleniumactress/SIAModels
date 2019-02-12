@@ -20,32 +20,11 @@ import static org.junit.Assert.*;
  * @author asus a455l
  */
 public class MataKuliahFactoryTest {
-    
-    public MataKuliahFactoryTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of getInstance method, of class MataKuliahFactory.
      */
     @Test
     public void testGetInstance() {
-        System.out.println("getInstance");
         MataKuliahFactory expResult = MataKuliahFactory.getInstance();
         MataKuliahFactory result = MataKuliahFactory.getInstance();
         assertEquals(expResult, result);
@@ -56,7 +35,6 @@ public class MataKuliahFactoryTest {
      */
     @Test
     public void testCreateMataKuliah_3args() {
-        System.out.println("createMataKuliah");
         String kode = "AIF152";
         int sks = 3;
         String nama = "abcdef";
@@ -69,9 +47,8 @@ public class MataKuliahFactoryTest {
     /**
      * Test of createMataKuliah method, of class MataKuliahFactory.
      */
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testCreateMataKuliah_String() {
-        System.out.println("createMataKuliah");
         String expResult = "AIF101";
         String kode = "AIF101";
         MataKuliahFactory instance = MataKuliahFactory.getInstance();
