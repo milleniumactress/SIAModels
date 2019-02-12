@@ -82,7 +82,7 @@ public class MataKuliahTest {
     /**
      * Test of equals method, of class MataKuliah.
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testEquals() {
         Object o = null;
         MataKuliah instance = new MataKuliah();

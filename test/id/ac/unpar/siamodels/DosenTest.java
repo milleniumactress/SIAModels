@@ -21,7 +21,7 @@ public class DosenTest {
     /**
      * Test of constuctor, of class Dosen.
      */
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testConstructorDosen() {
         Dosen instance = new Dosen(null,null);
         Dosen instance2 = new Dosen(null,"ab");
