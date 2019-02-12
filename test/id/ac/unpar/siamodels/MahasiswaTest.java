@@ -18,6 +18,7 @@ import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131102;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131105;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
@@ -34,39 +35,13 @@ import static org.junit.Assert.*;
  * @author Muhammad Ravi
  */
 public class MahasiswaTest {
-
+    
     public MahasiswaTest() {
+
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
+  
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
-//    /**
-//     * Test of calculateIPKLulus method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testCalculateIPKLulus() {
-//        System.out.println("calculateIPKLulus");
-//        Mahasiswa instance = new Mahasiswa("2016730041");
-//        double expResult = 0.0;
-//        double result = instance.calculateIPKLulus();
-//        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-//    }
     /**
      * Test of calculateIPTempuh method, of class Mahasiswa.
      */
@@ -79,7 +54,7 @@ public class MahasiswaTest {
         double expResult = 4.0;
         double result = instance.calculateIPTempuh(lulusSaja);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
+
     }
 
     /**
@@ -175,8 +150,76 @@ public class MahasiswaTest {
         boolean expResult = false;
         boolean result = instance.hasLulusKuliah(kodeMataKuliah);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
+
+    /**
+     * Test of getNama method, of class Mahasiswa.
+     */
+    @Test
+    public void testGetNama() {
+        System.out.println("getNama");
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.setNama("abcd");
+        String expResult = "abcd";
+        String result = instance.getNama();
+        assertEquals(expResult, result);
+        
+    }
+
+
+    /**
+     * Test of getNpm method, of class Mahasiswa.
+     */
+    @Test
+    public void testGetNpm() {
+        System.out.println("getNpm");
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        String expResult = "2016730041";
+        String result = instance.getNpm();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getPhotoPath method, of class Mahasiswa.
+     */
+    @Test
+    public void testGetPhotoPath() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.setPhotoPath("googledrive\2016730041");
+        String expResult = "googledrive\2016730041";
+        String result = instance.getPhotoPath();
+        assertEquals(expResult, result);
+    
+    }
+
+
+
+    /**
+     * Test of getEmailAddress method, of class Mahasiswa.
+     */
+    @Test
+    public void testGetEmailAddress() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        String expResult = "7316041@student.unpar.ac.id";
+        String result = instance.getEmailAddress();
+        assertEquals(expResult, result);
+    }
+
+//    /**
+//     * Test of getRiwayatNilai method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testGetRiwayatNilai() {
+//        List<Mahasiswa.Nilai> listNilai=new LinkedList<>();
+//        listNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"),new AIF131101(),"A"));
+//        
+//        Mahasiswa instance = new Mahasiswa("2016730041");
+//        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"),new AIF131101(),"A"));
+//        List<Mahasiswa.Nilai> expResult = listNilai;
+//        List<Mahasiswa.Nilai> result = instance.getRiwayatNilai();
+//        assertEquals(expResult, result);
+//    }
+
 
 
 }

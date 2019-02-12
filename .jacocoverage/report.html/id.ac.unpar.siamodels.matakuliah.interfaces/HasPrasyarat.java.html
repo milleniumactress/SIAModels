@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HasPrasyarat.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Project&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">id.ac.unpar.siamodels.matakuliah.interfaces</a> &gt; <span class="el_source">HasPrasyarat.java</span></div><h1>HasPrasyarat.java</h1><pre class="source lang-java linenums">package id.ac.unpar.siamodels.matakuliah.interfaces;
+
+import java.util.List;
+
+import id.ac.unpar.siamodels.Mahasiswa;
+
+/**
+ * Mendefinisikan kelas-kelas yang memiliki prasyarat, terkustomisasi
+ * untuk seorang {@link Mahasiswa}. Jika ada tambahan, jangan lupa untuk
+ * mendaftarkannya di {@link #DEFAULT_HASPRASYARAT_CLASSES}. Jika berubah package,
+ * jangan lupa mengupdate {@link #DEFAULT_PRASYARAT_PACKAGE}.
+ * @author pascal
+ *
+ */
+public interface HasPrasyarat {
+	
+	/**
+	 * Daftar dari nama kelas default seluruh turunan interface ini. Perlu didaftarkan
+	 * manual, karena Java reflection tidak dapat mendeteksi otomatis.
+	 */
+<span class="nc" id="L21">	public String[] DEFAULT_HASPRASYARAT_CLASSES = {</span>
+			&quot;AIF181100&quot;, &quot;AIF182101&quot;, &quot;AIF182103&quot;, &quot;AIF182105&quot;,
+			&quot;AIF182100&quot;, &quot;AIF182302&quot;, &quot;AIF182204&quot;, &quot;AIF182106&quot;,
+			&quot;AIF182308&quot;, &quot;AIF183201&quot;, &quot;AIF183303&quot;, &quot;AIF183305&quot;,
+			&quot;AIF183107&quot;, &quot;AIF183209&quot;, &quot;AIF183111&quot;, &quot;AIF183300&quot;,
+			&quot;AIF183204&quot;, &quot;AIF183106&quot;, &quot;AIF184303&quot;, &quot;AIF184001&quot;,
+			&quot;AIF184002&quot;, &quot;AIF184004&quot;, &quot;AIF182111&quot;, &quot;AIF182112&quot;,
+			&quot;AIF183117&quot;, &quot;AIF183119&quot;, &quot;AIF182121&quot;, &quot;AIF183227&quot;,
+			&quot;AIF183331&quot;, &quot;AIF183333&quot;, &quot;AIF183339&quot;, &quot;AIF183141&quot;,
+			&quot;AIF183143&quot;, &quot;AIF183145&quot;, &quot;AIF183147&quot;, &quot;AIF183149&quot;,
+			&quot;AIF183153&quot;, &quot;AIF183155&quot;, &quot;AIF183112&quot;, &quot;AIF183114&quot;,
+			&quot;AIF183116&quot;, &quot;AIF183118&quot;, &quot;AIF183120&quot;, &quot;AIF183122&quot;,
+			&quot;AIF183124&quot;, &quot;AIF183232&quot;, &quot;AIF183236&quot;, &quot;AIF183340&quot;,
+			&quot;AIF183342&quot;, &quot;AIF183348&quot;, &quot;AIF183250&quot;, &quot;AIF184109&quot;,
+			&quot;AIF184115&quot;, &quot;AIF184119&quot;, &quot;AIF184121&quot;, &quot;AIF184123&quot;,
+			&quot;AIF184125&quot;, &quot;AIF184129&quot;, &quot;AIF184231&quot;, &quot;AIF184233&quot;,
+			&quot;AIF184235&quot;, &quot;AIF184339&quot;, &quot;AIF184341&quot;, &quot;AIF184345&quot;,
+			&quot;AIF184247&quot;, &quot;AIF184104&quot;, &quot;AIF184106&quot;, &quot;AIF184108&quot;,
+			&quot;AIF184110&quot;, &quot;AIF184114&quot;, &quot;AIF184116&quot;, &quot;AIF184222&quot;,
+			&quot;AIF184224&quot;, &quot;AIF184228&quot;, &quot;AIF184230&quot;, &quot;AIF184334&quot;,
+			&quot;AIF184338&quot;, &quot;AIF184340&quot;, &quot;AIF184344&quot;};
+	
+	/**
+	 * Package tempat menyimpan seluruh turunan standar interface ini. Perlu didefinisikan
+	 * manual, karena Java reflection tidak dapat mendeteksi otomatis.
+	 */
+	public String DEFAULT_PRASYARAT_PACKAGE = &quot;id.ac.unpar.siamodels.matakuliah&quot;;
+	
+	/**
+	 * Memeriksa prasyarat-prasyarat dari kuliah, spesifik untuk mahasiswa
+	 * yang dituju. Jika ada pesan-pesan khusus, akan ditambahkan pada parameter
+	 * reasonsContainer.
+	 * @param mahasiswa prasyarat kuliah akan diperiksa spesifik pada mahasiswa ini
+	 * @param reasonsContainer pesan-pesan terkait prasyarat akan ditambahkan di sini, jika ada. 
+	 * @return true jika seluruh prasyarat dipenuhi, false jika tidak. 
+	 */
+	public boolean checkPrasyarat(Mahasiswa mahasiswa, List&lt;String&gt; reasonsContainer);
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
