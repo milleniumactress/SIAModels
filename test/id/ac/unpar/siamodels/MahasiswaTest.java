@@ -121,6 +121,39 @@ public class MahasiswaTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
+    
+        /**
+     * Test of calculateSKSTempuh method, of class Mahasiswa.
+     */
+    @Test
+    public void testCalculateSKSTempuhE() {
+        System.out.println("calculateSKSTempuh");
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"E"));//6
+        int expResult = 0;
+        int result = instance.calculateSKSTempuh(lulusSaja);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+            /**
+     * Test of calculateSKSTempuh method, of class Mahasiswa.
+     */
+    @Test
+    public void testCalculateSKSTempuhKosong() {
+        System.out.println("calculateSKSTempuh");
+        boolean lulusSaja = false;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),""));//6
+        int expResult = 0;
+        int result = instance.calculateSKSTempuh(lulusSaja);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+    
+    
 
     /**
      * Test of calculateTahunSemesterAktif method, of class Mahasiswa.
@@ -201,6 +234,22 @@ public class MahasiswaTest {
     public void testGetEmailAddress() {
         Mahasiswa instance = new Mahasiswa("2016730041");
         String expResult = "7316041@student.unpar.ac.id";
+        String result = instance.getEmailAddress();
+        assertEquals(expResult, result);
+    }
+    
+    @Test(expected=NumberFormatException.class)
+    public void testGetEmailAddressFalse() {
+        Mahasiswa instance = new Mahasiswa("56879890");
+        String expResult = "@student.unpar.ac.id";
+        String result = instance.getEmailAddress();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGetEmailAddressAngkatan2018() {
+        Mahasiswa instance = new Mahasiswa("6181801021");
+        String expResult = "6181801021@student.unpar.ac.id";
         String result = instance.getEmailAddress();
         assertEquals(expResult, result);
     }
