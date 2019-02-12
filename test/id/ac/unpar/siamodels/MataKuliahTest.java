@@ -100,5 +100,20 @@ public class MataKuliahTest {
         boolean result = this.mataKuliah.equals(o);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of equals method, of class MataKuliah.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object o = null;
+        MataKuliah instance = new MataKuliah();
+        boolean expResult = false;
+        boolean result = instance.equals(o);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

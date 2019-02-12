@@ -18,25 +18,6 @@ import static org.junit.Assert.*;
  * @author asus a455l
  */
 public class DosenTest {
-    
-    public DosenTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getNik method, of class Dosen.
