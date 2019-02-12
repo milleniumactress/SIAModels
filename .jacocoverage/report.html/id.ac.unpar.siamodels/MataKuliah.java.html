@@ -8,13 +8,13 @@ public class MataKuliah {
 
 <span class="fc" id="L9">    public MataKuliah() {</span>
 <span class="fc" id="L10">        this.kode = this.getClass().getSimpleName();</span>
-<span class="pc bpc" id="L11" title="1 of 2 branches missed.">        if (this.getClass().isAnnotationPresent(InfoMataKuliah.class)) {</span>
+<span class="fc bfc" id="L11" title="All 2 branches covered.">        if (this.getClass().isAnnotationPresent(InfoMataKuliah.class)) {</span>
 <span class="fc" id="L12">            InfoMataKuliah infoMK = (InfoMataKuliah) this.getClass().getAnnotation(InfoMataKuliah.class);</span>
 <span class="fc" id="L13">            this.nama = infoMK.nama();</span>
 <span class="fc" id="L14">            this.sks = infoMK.sks();</span>
 <span class="fc" id="L15">        } else {</span>
-<span class="nc" id="L16">            this.nama = null;</span>
-<span class="nc" id="L17">            this.sks = null;</span>
+<span class="fc" id="L16">            this.nama = null;</span>
+<span class="fc" id="L17">            this.sks = null;</span>
         }
 <span class="fc" id="L19">    }</span>
 

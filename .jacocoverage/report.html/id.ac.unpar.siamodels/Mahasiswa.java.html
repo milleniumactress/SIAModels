@@ -30,24 +30,24 @@ public class Mahasiswa {
 <span class="fc" id="L30">	}</span>
 
 	public String getNama() {
-<span class="nc" id="L33">		return nama;</span>
+<span class="fc" id="L33">		return nama;</span>
 	}
 
 	public void setNama(String nama) {
-<span class="nc" id="L37">		this.nama = nama;</span>
-<span class="nc" id="L38">	}</span>
+<span class="fc" id="L37">		this.nama = nama;</span>
+<span class="fc" id="L38">	}</span>
 
 	public String getNpm() {
 <span class="fc" id="L41">		return npm;</span>
 	}
 
 	public String getPhotoPath() {
-<span class="nc" id="L45">		return photoPath;</span>
+<span class="fc" id="L45">		return photoPath;</span>
 	}
 
 	public void setPhotoPath(String photoPath) {
-<span class="nc" id="L49">		this.photoPath = photoPath;</span>
-<span class="nc" id="L50">	}</span>
+<span class="fc" id="L49">		this.photoPath = photoPath;</span>
+<span class="fc" id="L50">	}</span>
 	
 	public List&lt;JadwalKuliah&gt; getJadwalKuliahList() {
 <span class="nc" id="L53">		return jadwalKuliahList;</span>
@@ -58,8 +58,8 @@ public class Mahasiswa {
 <span class="nc" id="L58">	}</span>
 
 	public String getEmailAddress() {
-<span class="nc bnc" id="L61" title="All 4 branches missed.">		if (npm.matches(&quot;[2]{1}[0]{1}\\d{8}&quot;) &amp;&amp; Integer.parseInt(npm.substring(0,4)) &lt; 2017){</span>
-<span class="nc" id="L62">			return npm.substring(4, 6) + npm.substring(2, 4) + npm.substring(7, 10) + &quot;@student.unpar.ac.id&quot;;</span>
+<span class="pc bpc" id="L61" title="2 of 4 branches missed.">		if (npm.matches(&quot;[2]{1}[0]{1}\\d{8}&quot;) &amp;&amp; Integer.parseInt(npm.substring(0,4)) &lt; 2017){</span>
+<span class="fc" id="L62">			return npm.substring(4, 6) + npm.substring(2, 4) + npm.substring(7, 10) + &quot;@student.unpar.ac.id&quot;;</span>
 		} else {
 <span class="nc" id="L64">			return npm + &quot;@student.unpar.ac.id&quot;;</span>
 		}
