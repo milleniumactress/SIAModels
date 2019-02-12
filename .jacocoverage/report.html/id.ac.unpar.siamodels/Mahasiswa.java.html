@@ -22,8 +22,8 @@ public class Mahasiswa {
 	
 	public Mahasiswa(String npm) throws NumberFormatException {
 <span class="fc" id="L24">		super();</span>
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">		if (!npm.matches(&quot;[0-9]{10}&quot;)) {</span>
-<span class="nc" id="L26">			throw new NumberFormatException(&quot;NPM tidak valid: &quot; + npm);</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">		if (!npm.matches(&quot;[0-9]{10}&quot;)) {</span>
+<span class="fc" id="L26">			throw new NumberFormatException(&quot;NPM tidak valid: &quot; + npm);</span>
 		}
 <span class="fc" id="L28">		this.npm = npm;</span>
 <span class="fc" id="L29">		this.riwayatNilai = new ArrayList&lt;Nilai&gt;();</span>
@@ -58,10 +58,10 @@ public class Mahasiswa {
 <span class="nc" id="L58">	}</span>
 
 	public String getEmailAddress() {
-<span class="pc bpc" id="L61" title="2 of 4 branches missed.">		if (npm.matches(&quot;[2]{1}[0]{1}\\d{8}&quot;) &amp;&amp; Integer.parseInt(npm.substring(0,4)) &lt; 2017){</span>
+<span class="pc bpc" id="L61" title="1 of 4 branches missed.">		if (npm.matches(&quot;[2]{1}[0]{1}\\d{8}&quot;) &amp;&amp; Integer.parseInt(npm.substring(0,4)) &lt; 2017){</span>
 <span class="fc" id="L62">			return npm.substring(4, 6) + npm.substring(2, 4) + npm.substring(7, 10) + &quot;@student.unpar.ac.id&quot;;</span>
 		} else {
-<span class="nc" id="L64">			return npm + &quot;@student.unpar.ac.id&quot;;</span>
+<span class="fc" id="L64">			return npm + &quot;@student.unpar.ac.id&quot;;</span>
 		}
 	}
 	
@@ -244,11 +244,11 @@ public class Mahasiswa {
 <span class="fc" id="L244">		int totalSKS = 0;</span>
 		// Tambahkan SKS setiap kuliah
 <span class="fc bfc" id="L246" title="All 2 branches covered.">		for (Nilai nilai: riwayatNilai) {</span>
-<span class="pc bpc" id="L247" title="1 of 2 branches missed.">			if (nilai.getNilaiAkhir().equals(&quot;&quot;)) {</span>
-<span class="nc" id="L248">				continue;</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">			if (nilai.getNilaiAkhir().equals(&quot;&quot;)) {</span>
+<span class="fc" id="L248">				continue;</span>
 			}
-<span class="pc bpc" id="L250" title="1 of 4 branches missed.">			if (lulusSaja &amp;&amp; nilai.getNilaiAkhir().equals(&quot;E&quot;)) {</span>
-<span class="nc" id="L251">				continue;</span>
+<span class="fc bfc" id="L250" title="All 4 branches covered.">			if (lulusSaja &amp;&amp; nilai.getNilaiAkhir().equals(&quot;E&quot;)) {</span>
+<span class="fc" id="L251">				continue;</span>
 			}
 <span class="fc" id="L253">			String kodeMK = nilai.getMataKuliah().getKode();</span>
 <span class="fc bfc" id="L254" title="All 2 branches covered.">			if (!sksTerhitung.contains(kodeMK)) {</span>
