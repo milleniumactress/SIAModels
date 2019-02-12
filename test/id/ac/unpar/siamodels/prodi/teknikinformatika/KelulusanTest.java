@@ -90,32 +90,11 @@ import static org.junit.Assert.*;
  * @author Amabel
  */
 public class KelulusanTest {
-    
-    public KelulusanTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of checkPrasyarat method, of class Kelulusan.
      */
     @Test
     public void testCheckPrasyarat() {
-        System.out.println("checkPrasyarat");
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
         
