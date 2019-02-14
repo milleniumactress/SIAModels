@@ -16,16 +16,15 @@ import id.ac.unpar.siamodels.matakuliah.kurikulum2018.*;
  * @author Richard
  */
 public class JadwalKuliahTest {
-        JadwalKuliah jk = new JadwalKuliah(mataKuliah,'A',d,"Senin","08.00-10.00","9017");
-        Dosen d = new Dosen("12345678","abc");
-        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
+        
     @Test
     public void testConstructorJadwalKuliah() {
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         MataKuliah mataKuliah = mkf.createMataKuliah("AIF131101");
-    /**
-     * Test of constructor, of class JadwalKuliah.
-     */
+        Dosen d = new Dosen("12345678","abc");
+        JadwalKuliah jk = new JadwalKuliah(mataKuliah,'A',d,"Senin","08.00-10.00","9017");
     }
+    
     
     /**
      * Method yang menguji metode setMataKuliah() dan getMataKuliah()
@@ -181,7 +180,9 @@ public class JadwalKuliahTest {
     @Test
     public void testGetPengajar(){
         Dosen exp = new Dosen("20000001","Anton Sudardjo");
-        Dosen get = this.jadwal.getPengajar();
+        JadwalKuliah jK = new JadwalKuliah();
+        jK.setPengajar(exp);
+        Dosen get = jK.getPengajar();
         assertEquals(exp,get);
     }
 
