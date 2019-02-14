@@ -57,4 +57,57 @@ public class MataKuliahFactoryTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of createMataKuliah method, of class MataKuliahFactory.
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testCreateMataKuliah_StringNotFound() {
+        String expResult = "AIF131101123123";
+        String kode = "AIF131101123123";
+        MataKuliahFactory instance = MataKuliahFactory.getInstance();
+        MataKuliah mk = instance.createMataKuliah(kode);
+        String result = mk.getKode();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of createMataKuliah method, of class MataKuliahFactory.
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testCreateMataKuliah_3argsNotFound() {
+        String expResult = "AIF1311011231234";
+        String kode = "AIF1311011231234";
+        MataKuliahFactory instance = MataKuliahFactory.getInstance();
+        MataKuliah mk = instance.createMataKuliah(kode);
+        String result = mk.getKode();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of createMataKuliah method, of class MataKuliahFactory.
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testCreateMataKuliah_3argsNotFound2() {
+        String expResult = "AIF123456";
+        String kode = "AIF123456";
+        MataKuliahFactory instance = MataKuliahFactory.getInstance();
+        MataKuliah mk = instance.createMataKuliah(kode);
+        String result = mk.getKode();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of createMataKuliah method, of class MataKuliahFactory.
+     */
+    @Test
+    public void testCreateMataKuliah_3argsUpdateInfo() {
+        String expResult = "AIF131101";
+        String kode = "AIF131101";
+        int sks = 2;
+        String nama = "PBO";
+        MataKuliahFactory instance = MataKuliahFactory.getInstance();
+        MataKuliah mk = instance.createMataKuliah(kode, sks, nama);
+        String result = mk.getKode();
+        assertEquals(expResult, result);
+    }
 }
