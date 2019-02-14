@@ -50,7 +50,6 @@ public class JadwalKuliahTest {
         instance.setMataKuliah(mataKuliah);
         MataKuliah expected = new AIF131101();
         assertEquals(expected,instance.getMataKuliah());
-        // TODO review the generated test code and remove the default call to fail.
     }
     
     @Test
@@ -61,7 +60,6 @@ public class JadwalKuliahTest {
         instance.setMataKuliah(mataKuliah);
         MataKuliah expected = new AIF181100();
         assertEquals(expected,instance.getMataKuliah());
-        // TODO review the generated test code and remove the default call to fail.
     }
     
     @Test
@@ -72,7 +70,6 @@ public class JadwalKuliahTest {
         instance.setMataKuliah(mataKuliah);
         MataKuliah expected = new AIF184121();
         assertEquals(expected,instance.getMataKuliah());
-        // TODO review the generated test code and remove the default call to fail.
     }
     
     @Test
@@ -83,7 +80,6 @@ public class JadwalKuliahTest {
         instance.setMataKuliah(mataKuliah);
         MataKuliah expected = new MKU180370();
         assertEquals(expected,instance.getMataKuliah());
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
@@ -108,7 +104,6 @@ public class JadwalKuliahTest {
         JadwalKuliah instance = new JadwalKuliah();
         instance.setKelas(kelas);
         Character exp = 'A';
-        // TODO review the generated test code and remove the default call to fail.
         assertEquals(exp,instance.getKelas());
     }
 
