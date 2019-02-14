@@ -35,19 +35,11 @@ import static org.junit.Assert.*;
  * @author Muhammad Ravi
  */
 public class MahasiswaTest {
-    
-    public MahasiswaTest() {
-
-    }
-
-  
-
     /**
      * Test of calculateIPTempuh method, of class Mahasiswa.
      */
     @Test
     public void testCalculateIPTempuh() {
-        System.out.println("calculateIPTempuh");
         boolean lulusSaja = true;
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
@@ -62,7 +54,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testCalculateIPKumulatif() {
-        System.out.println("calculateIPKumulatif");
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
@@ -78,7 +69,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testCalculateIPS() {
-        System.out.println("calculateIPS");
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
@@ -94,7 +84,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testCalculateSKSLulus() {
-        System.out.println("calculateSKSLulus");
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
@@ -110,7 +99,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testCalculateSKSTempuh() {
-        System.out.println("calculateSKSTempuh");
         boolean lulusSaja = false;
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
@@ -127,7 +115,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testCalculateSKSTempuhE() {
-        System.out.println("calculateSKSTempuh");
         boolean lulusSaja = true;
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"E"));//6
@@ -142,7 +129,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testCalculateSKSTempuhKosong() {
-        System.out.println("calculateSKSTempuh");
         boolean lulusSaja = false;
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),""));//6
@@ -160,7 +146,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testCalculateTahunSemesterAktif() {
-        System.out.println("calculateTahunSemesterAktif");
         Mahasiswa instance = new Mahasiswa("2016730041");
         TahunSemester tahunSemester=new TahunSemester("161");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(tahunSemester, new AIF131101(),"A"));//6 
@@ -176,7 +161,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testHasLulusKuliah() {
-        System.out.println("hasLulusKuliah");
         String kodeMataKuliah = "AIF101";
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(),"E"));//6 
@@ -190,7 +174,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testGetNama() {
-        System.out.println("getNama");
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.setNama("abcd");
         String expResult = "abcd";
@@ -205,7 +188,6 @@ public class MahasiswaTest {
      */
     @Test
     public void testGetNpm() {
-        System.out.println("getNpm");
         Mahasiswa instance = new Mahasiswa("2016730041");
         String expResult = "2016730041";
         String result = instance.getNpm();
