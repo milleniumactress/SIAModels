@@ -22,6 +22,17 @@ import id.ac.unpar.siamodels.matakuliah.kurikulum2018.*;
 public class JadwalKuliahTest {
 
     /**
+     * Test of constructor, of class JadwalKuliah.
+     */
+    @Test
+    public void testConstructorJadwalKuliah() {
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
+        MataKuliah mataKuliah = mkf.createMataKuliah("AIF131101");
+        Dosen d = new Dosen("12345678","abc");
+        JadwalKuliah jk = new JadwalKuliah(mataKuliah,'A',d,"Senin","08.00-10.00","9017");
+    }
+    
+    /**
      * Test of setMataKuliah method, of class JadwalKuliah.
      */
     @Test
