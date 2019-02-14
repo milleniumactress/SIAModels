@@ -35,8 +35,9 @@ import static org.junit.Assert.*;
  * @author Muhammad Ravi
  */
 public class MahasiswaTest {
+    
     /**
-     * Test of calculateIPTempuh method, of class Mahasiswa.
+     * Tes menghitung Indeks Prestasi (IP) yang telah ditempuh dan semuanya lulus.
      */
     @Test
     public void testCalculateIPTempuh() {
@@ -50,7 +51,7 @@ public class MahasiswaTest {
     }
 
     /**
-     * Test of calculateIPKumulatif method, of class Mahasiswa.
+     * Tes menghitung Indeks Prestasi Kumulatif(IPK) dengan semua nilai lulus dan tidak lulus
      */
     @Test
     public void testCalculateIPKumulatif() {
@@ -65,7 +66,7 @@ public class MahasiswaTest {
     }
 
     /**
-     * Test of calculateIPS method, of class Mahasiswa.
+     * Tes untuk menghitugng Indeks prestasi semester (IPS) dengan semua matkul lulus
      */
     @Test
     public void testCalculateIPS() {
@@ -80,7 +81,7 @@ public class MahasiswaTest {
     }
 
     /**
-     * Test of calculateSKSLulus method, of class Mahasiswa.
+     * Tes untuk menghitung SKS yang telah ditempuh mahasiswa yang lulusnya saja.
      */
     @Test
     public void testCalculateSKSLulus() {
@@ -95,7 +96,7 @@ public class MahasiswaTest {
     }
 
     /**
-     * Test of calculateSKSTempuh method, of class Mahasiswa.
+     * Tes untuk menghitung SKS yang telah ditempuh mahasiswa yang lulus dan tidak lulus.
      */
     @Test
     public void testCalculateSKSTempuh() {
@@ -107,11 +108,10 @@ public class MahasiswaTest {
         int expResult = 13;
         int result = instance.calculateSKSTempuh(lulusSaja);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
     
-        /**
-     * Test of calculateSKSTempuh method, of class Mahasiswa.
+    /**
+     * Tes untuk menhitung SKS yang ditempuh mahasiswa jika semua nilainya E.
      */
     @Test
     public void testCalculateSKSTempuhE() {
@@ -125,7 +125,7 @@ public class MahasiswaTest {
     }
     
             /**
-     * Test of calculateSKSTempuh method, of class Mahasiswa.
+     * Tes untuk menghitung SKS yang telah ditempuh mahasiswa dan belum ada nilainya.
      */
     @Test
     public void testCalculateSKSTempuhKosong() {
@@ -135,14 +135,13 @@ public class MahasiswaTest {
         int expResult = 0;
         int result = instance.calculateSKSTempuh(lulusSaja);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
     
     
     
 
     /**
-     * Test of calculateTahunSemesterAktif method, of class Mahasiswa.
+     * Tes untuk menghitung tahun semester aktif yang telah ditempuh oleh mahasiswa.
      */
     @Test
     public void testCalculateTahunSemesterAktif() {
@@ -153,11 +152,10 @@ public class MahasiswaTest {
         expResult.add(tahunSemester);
         Set<TahunSemester> result = instance.calculateTahunSemesterAktif();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
-     * Test of hasLulusKuliah method, of class Mahasiswa.
+     * Tes untuk mengetahui apakah mahasiswa telah lulus mata kuliah tertentu.
      */
     @Test
     public void testHasLulusKuliah() {
@@ -170,7 +168,7 @@ public class MahasiswaTest {
     }
 
     /**
-     * Test of getNama method, of class Mahasiswa.
+     * Tes untuk mengambil nama mahasiswa.
      */
     @Test
     public void testGetNama() {
@@ -184,7 +182,7 @@ public class MahasiswaTest {
 
 
     /**
-     * Test of getNpm method, of class Mahasiswa.
+     * Tes untuk mengambil NPM mahasiswa.
      */
     @Test
     public void testGetNpm() {
@@ -195,7 +193,7 @@ public class MahasiswaTest {
     }
 
     /**
-     * Test of getPhotoPath method, of class Mahasiswa.
+     * Tes untuk mengambil alamat file foto mahasiswa.
      */
     @Test
     public void testGetPhotoPath() {
@@ -210,7 +208,8 @@ public class MahasiswaTest {
 
 
     /**
-     * Test of getEmailAddress method, of class Mahasiswa.
+     * tes untuk mengambil alamat email mahasiswa angkatan 2017 ke bawah.
+     * NPM sesuai dengan ketentuan
      */
     @Test
     public void testGetEmailAddress() {
@@ -219,7 +218,9 @@ public class MahasiswaTest {
         String result = instance.getEmailAddress();
         assertEquals(expResult, result);
     }
-    
+     /**
+     * tes untuk mengambil alamat email mahasiswa dan NPM tidak sesuai ketentuan.
+     */
     @Test(expected=NumberFormatException.class)
     public void testGetEmailAddressFalse() {
         Mahasiswa instance = new Mahasiswa("56879890");
@@ -228,6 +229,10 @@ public class MahasiswaTest {
         assertEquals(expResult, result);
     }
     
+     /**
+     * tes untuk mengambil alamat email mahasiswa angkatan 2017 ke bawah.
+     * NPM sesuai dengan ketentuan
+     */
     @Test
     public void testGetEmailAddressAngkatan2018() {
         Mahasiswa instance = new Mahasiswa("6181801021");
