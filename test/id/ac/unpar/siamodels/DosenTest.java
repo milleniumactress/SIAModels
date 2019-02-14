@@ -79,10 +79,9 @@ public class DosenTest {
 
     /**
      * Test of equals method, of class Dosen.
-     * Jika objek dari dosen sama dengan objek yang dibanding.
      */
     @Test
-    public void testEquals() {
+    public void testEqualsObjSama() {
         Object obj = new Dosen("12345678", "ABC");
         Dosen instance = (Dosen)obj;
         boolean expResult = true;
@@ -92,10 +91,9 @@ public class DosenTest {
     
     /**
      * Test of equals method, of class Dosen.
-     * Jika objek yang dibandingkan null.
      */
     @Test
-    public void testEquals2() {
+    public void testEqualsObjNull() {
         Object obj = null;
         Dosen instance = new Dosen("12345678", "ABC");
         boolean expResult = false;
@@ -105,10 +103,9 @@ public class DosenTest {
     
     /**
      * Test of equals method, of class Dosen.
-     * Jika kelas Dosen beda dengan kelas objek yang dibandingkan.
      */
     @Test
-    public void testEquals3() {
+    public void testEqualsObjBedaKelas() {
         Mahasiswa obj = new Mahasiswa("2016730002");
         Dosen instance = new Dosen("12345678", "ABC");
         boolean expResult = false;
@@ -118,18 +115,25 @@ public class DosenTest {
     
     /**
      * Test of equals method, of class Dosen.
-     * Jika salah satu NIK null, dua-duanya null, atau dua-duanya tidak null
      */
     @Test
-    public void testEquals4() {
-        Dosen instance = new Dosen("123456","");
-        Dosen instance2 = new Dosen("123456", "ABC");
-        //Dosen instance3 = new Dosen(null,"");
-        boolean expResult = true;
-        boolean expResult2 = false;
-        boolean result = instance.equals(instance2);
-        //boolean result2 = instance.equals(instance3);
+    public void testEqualsObjNamaNull() {
+        Dosen instance = new Dosen(null, "abc");
+        Object obj = new Dosen("12345678", null);
+        boolean expResult = false;
+        boolean result = instance.equals(obj);
         assertEquals(expResult, result);
-        //assertEquals(expResult2, result2);
+    }
+    
+    /**
+     * Test of equals method, of class Dosen.
+     */
+    @Test
+    public void testEqualsObjNIKNull() {
+        Dosen instance = new Dosen("12345678",null);
+        Object obj = new Dosen(null, "ABC");
+        boolean expResult = false;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
     }
 }
