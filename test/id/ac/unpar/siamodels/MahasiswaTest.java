@@ -424,42 +424,67 @@ public class MahasiswaTest {
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B-"));
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(),"A-"));
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131106(),"B+")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131105(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131106(),"B+")); 
         Double expResult = 4.0;
         Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
         assertEquals(expResult, result);
     }
+    
+        /**
+     * Test mengambil nilai akhir mata kuliah jika nilai kosong
+     */
+    @Test
+    public void testGetNilaiAkhirMataKuliahKosong() {
+        String kodeMataKuliah = "AIF131101";
+        Mahasiswa instance = new Mahasiswa("2016730041"); 
+        Double expResult = 0.0;
+        Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+    }
 
-//    /**
-//     * Test of hasTempuhKuliah method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testHasTempuhKuliah() {
-//        System.out.println("hasTempuhKuliah");
-//        String kodeMataKuliah = "";
-//        Mahasiswa instance = null;
-//        boolean expResult = false;
-//        boolean result = instance.hasTempuhKuliah(kodeMataKuliah);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getTahunAngkatan method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testGetTahunAngkatan() {
-//        System.out.println("getTahunAngkatan");
-//        Mahasiswa instance = null;
-//        int expResult = 0;
-//        int result = instance.getTahunAngkatan();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * tes kuliah yang telah ditempuh mahasiswa jika true
+     */
+    @Test
+    public void testHasTempuhKuliahTrue() {
+        String kodeMataKuliah = "AIF131101";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        boolean expResult = true;
+        boolean result = instance.hasTempuhKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+        
+    }
+    
+    /**
+     * tes kuliah yang telah ditempuh mahasiswa jika false
+     */
+    @Test
+    public void testHasTempuhKuliahFalse() {
+        String kodeMataKuliah = "AIF131102";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        boolean expResult = false;
+        boolean result = instance.hasTempuhKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+        
+    }
+    
+
+    /**
+     * tes untuk mengambil tahun angkatan mahasiswa.
+     */
+    @Test
+    public void testGetTahunAngkatan() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        int expResult = 2016;
+        int result = instance.getTahunAngkatan();
+        assertEquals(expResult, result);
+       
+    }
+
     /**
      * Test of toString method, of class Mahasiswa.
      */
@@ -485,77 +510,46 @@ public class MahasiswaTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
-//
-//    /**
-//     * Test of getRiwayatNilai method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testGetRiwayatNilai() {
-//        System.out.println("getRiwayatNilai");
-//        Mahasiswa instance = null;
-//        List<Mahasiswa.Nilai> expResult = null;
-//        List<Mahasiswa.Nilai> result = instance.getRiwayatNilai();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getNilaiTOEFL method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testGetNilaiTOEFL() {
-//        System.out.println("getNilaiTOEFL");
-//        Mahasiswa instance = null;
-//        SortedMap<LocalDate, Integer> expResult = null;
-//        SortedMap<LocalDate, Integer> result = instance.getNilaiTOEFL();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateIPKLulus method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testCalculateIPKLulus() {
-//        System.out.println("calculateIPKLulus");
-//        Mahasiswa instance = null;
-//        double expResult = 0.0;
-//        double result = instance.calculateIPKLulus();
-//        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateIPLulus method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testCalculateIPLulus() {
-//        System.out.println("calculateIPLulus");
-//        Mahasiswa instance = null;
-//        double expResult = 0.0;
-//        double result = instance.calculateIPLulus();
-//        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calculateIPKTempuh method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testCalculateIPKTempuh() {
-//        System.out.println("calculateIPKTempuh");
-//        boolean lulusSaja = false;
-//        Mahasiswa instance = null;
-//        double expResult = 0.0;
-//        double result = instance.calculateIPKTempuh(lulusSaja);
-//        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
+
+    /**
+     * Tes untuk menghitung IP kumulatif  mahsiswa sampai saat ini
+     */
+    @Test
+    public void testCalculateIPKLulus() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"B")); 
+        double expResult = 3.0;
+        double result = instance.calculateIPKLulus();
+        assertEquals(expResult, result, 0.0);
+    
+    }
+
+    /**
+     * Test untuk Menghitung IP mahasiswa sampai saat ini.
+     * dengan aturan hanya nilai yang lulus saja yang dihitung
+     */
+    @Test
+    public void testCalculateIPLulus() {
+        Mahasiswa instance = new Mahasiswa("2016730042");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"B"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"E")); 
+        double expResult = 3.0;
+        double result = instance.calculateIPLulus();
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Tes untuk Menghitung IP mahasiswa sampai saat ini.
+     * dengan aturan semua nilai, termasuk yang tidak lulus, dihitung
+     */
+    @Test
+    public void testCalculateIPKTempuh() {
+        boolean lulusSaja = false;
+        Mahasiswa instance = null;
+        double expResult = 0.0;
+        double result = instance.calculateIPKTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+    }
 
 }
