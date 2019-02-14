@@ -49,9 +49,101 @@ public class MahasiswaTest {
         assertEquals(expResult, result, 0.0);
 
     }
+    
+    /**
+     * Tes menghitung Indeks Prestasi (IP) jika mahasiswa belum memiliki riwayat nilai.
+     * contoh; Mahasiswa Baru
+     */
+    @Test
+    public void testCalculateIPTempuhKosong() {
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        double expResult=Double.NaN;
+        double result = instance.calculateIPTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+
+    }
+    
+    /**
+     * Tes menghitung Indeks Prestasi (IP) jika nilai belum keluar.
+     */
+    @Test
+    public void testCalculateIPTempuhNilaiBelumKeluar() {
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),""));//6
+        double expResult=Double.NaN;
+        double result = instance.calculateIPTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+
+    }
+    
+    /**
+     * Tes menghitung Indeks Prestasi (IP) yang tidak lulus saja jika mahasiswa Memiliki nilai yang tidak lulus.
+   
+     */
+    @Test
+    public void testCalculateIPTempuhLulusSajaFalseDanAdaE() {
+        boolean lulusSaja = false;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"E"));//3
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
+        double expResult=24.0/10.0;
+        double result = instance.calculateIPTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+
+    }
+    
+    /**
+     * Tes menghitung Indeks Prestasi (IP) yang lulus saja jika mahasiswa Memiliki nilai yang tidak lulus.
+   
+     */
+    @Test
+    public void testCalculateIPTempuhLulusSajaTrueDanAdaE() {
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"E"));//3
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//3
+        double expResult=4.0;
+        double result = instance.calculateIPTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+
+    }
+    
+    /**
+     * Tes menghitung Indeks Prestasi (IP) jika Mahasiswa mengambil mata kuliah lebih dari 2 kali dan tidak ada nilai terbaik.
+   
+     */
+    @Test
+    public void testCalculateIPTempuTidakAdaNilaiTerbaik() {
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"C"));//6
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131101(),"C"));//6
+        double expResult=2.0;
+        double result = instance.calculateIPTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+
+    }
+    
+        /**
+     * Tes menghitung Indeks Prestasi (IP) jika Mahasiswa mengambil mata kuliah lebih dari 2 kali dan ada nilai terbaik.
+   
+     */
+    @Test
+    public void testCalculateIPTempuAdaNilaiTerbaik() {
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"C"));//6
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131101(),"A"));//6
+        double expResult=4.0;
+        double result = instance.calculateIPTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+
+    }
 
     /**
-     * Tes menghitung Indeks Prestasi Kumulatif(IPK) dengan semua nilai lulus dan tidak lulus
+     * Tes menghitung Indeks Prestasi Kumulatif(IPK) dengan semua nilai tidak lulus
      */
     @Test
     public void testCalculateIPKumulatif() {
@@ -60,6 +152,31 @@ public class MahasiswaTest {
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "C"));//3
         double expResult = 42.0 / 13.0;
+        double result = instance.calculateIPKumulatif();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+    /**
+     * Tes menghitung Indeks Prestasi Kumulatif(IPK) jika nilai kosong (size=0)
+     */
+    @Test
+    public void testCalculateIPKumulatifNilaiKosong() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), ""));//3
+        double expResult = Double.NaN;
+        double result = instance.calculateIPKumulatif();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+        /**
+     * Tes menghitung Indeks Prestasi Kumulatif(IPK) jika nilai belum Keluar
+     */
+    @Test
+    public void testCalculateIPKumulatifNilaiBelumKeluar() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        double expResult = Double.NaN;
         double result = instance.calculateIPKumulatif();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
@@ -78,6 +195,29 @@ public class MahasiswaTest {
         double result = instance.calculateIPS();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
+    }
+    
+        /**
+     * Tes untuk menghitugng Indeks prestasi semester (IPS) jika nilai kosong
+     */
+    @Test(expected=ArrayIndexOutOfBoundsException.class)
+    public void testCalculateIPSKosong() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        double expResult = Double.NaN;
+        double result = instance.calculateIPS();
+        assertEquals(expResult, result, 0.0);
+    }
+    
+    /**
+     * Tes untuk menghitugng Indeks prestasi semester (IPS) jika nilai belum keluar
+     */
+    @Test
+    public void testCalculateIPSNilaiBelumKeluar() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),""));//4
+        double expResult = Double.NaN;
+        double result = instance.calculateIPS();
+        assertEquals(expResult, result, 0.0);
     }
 
     /**
