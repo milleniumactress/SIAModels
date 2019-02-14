@@ -12,13 +12,16 @@ import static org.junit.Assert.*;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.*;
 
 /**
- *
+ * Kelas yang menguji kelas JadwalKuliah
  * @author Richard
  */
 public class JadwalKuliahTest {
         
     private JadwalKuliah jadwal;
     
+    /**
+     * Constructor yang menginisialisasi atribut-atribut yang diperlukan untuk test
+     */
     public JadwalKuliahTest() {
         
         this.jadwal = new JadwalKuliah(new MataKuliah("AIF183114","Algoritma Kriptografi",3), 'A', 
@@ -26,7 +29,8 @@ public class JadwalKuliahTest {
     }
     
     /**
-     * Test of setMataKuliah method, of class JadwalKuliah.
+     * Method yang menguji metode setMataKuliah() dan getMataKuliah()
+     * @Input null
      */
     @Test
     public void testSetGetMataKuliahNull() {
@@ -37,8 +41,12 @@ public class JadwalKuliahTest {
         assertEquals(exp,instance.getMataKuliah());
     }
     
+    /**
+     * Method yang menguji getter dan setter Matakuliah dalam JadwalKuliah
+     * @Input AIF131101 (Matakuliah yang valid)
+     */
     @Test
-    public void testSetGetMataKuliahWajib2013() {
+    public void testSetGetMataKuliah() {
         MataKuliah mataKuliah = new AIF131101();
         JadwalKuliah instance = new JadwalKuliah();
         instance.setMataKuliah(mataKuliah);
@@ -46,39 +54,10 @@ public class JadwalKuliahTest {
         assertEquals(expected,instance.getMataKuliah());
         // TODO review the generated test code and remove the default call to fail.
     }
-    
-    @Test
-    public void testSetGetMataKuliahWajib2018() {
-        MataKuliah mataKuliah = new AIF181100();
-        JadwalKuliah instance = new JadwalKuliah();
-        instance.setMataKuliah(mataKuliah);
-        MataKuliah expected = new AIF181100();
-        assertEquals(expected,instance.getMataKuliah());
-        // TODO review the generated test code and remove the default call to fail.
-    }
-    
-    @Test
-    public void testSetGetMataKuliahPilihan() {
-        MataKuliah mataKuliah = new AIF184121();
-        JadwalKuliah instance = new JadwalKuliah();
-        instance.setMataKuliah(mataKuliah);
-        MataKuliah expected = new AIF184121();
-        assertEquals(expected,instance.getMataKuliah());
-        // TODO review the generated test code and remove the default call to fail.
-    }
-    
-    @Test
-    public void testSetGetMataKuliahUmum() {
-        MataKuliah mataKuliah = new MKU180370();
-        JadwalKuliah instance = new JadwalKuliah();
-        instance.setMataKuliah(mataKuliah);
-        MataKuliah expected = new MKU180370();
-        assertEquals(expected,instance.getMataKuliah());
-        // TODO review the generated test code and remove the default call to fail.
-    }
 
     /**
-     * Test of getKelas method, of class JadwalKuliah.
+     * Method yang menguji getter dan setter dari atribut kelas dari JadwalKuliah
+     * @Input null
      */
     @Test
     public void testSetGetKelasNull() {
@@ -89,7 +68,8 @@ public class JadwalKuliahTest {
     }
 
     /**
-     * Test of setKelas method, of class JadwalKuliah.
+     * Method yang menguji getter dan setter atribut kelas dari JadwalKuliah
+     * @Input 'A' (kelas yang valid)
      */
     @Test
     public void testSetGetKelasValid() {
@@ -102,7 +82,7 @@ public class JadwalKuliahTest {
     }
 
     /**
-     * Test of setHari method, of class JadwalKuliah.
+     * Method yang menguji getter dan setter atribut hari dalam JadwalKuliah
      */
     @Test
     public void testSetGetHari() {
@@ -114,7 +94,7 @@ public class JadwalKuliahTest {
     }
 
     /**
-     * Test of setWaktuMulai method, of class JadwalKuliah.
+     * Method yang menguji getter dan setter atribut waktuMulai dalam JadwalKuliah
      */
     @Test
     public void testSetGetWaktuMulai() {
@@ -126,7 +106,7 @@ public class JadwalKuliahTest {
     }
 
     /**
-     * Test of getWaktuMulai method, of class JadwalKuliah.
+     * Method yang menguji getter dan setter atribut waktuSelesai dalam JadwalKuliah
      */
     @Test
     public void testSetGetWaktuSelesai() {
@@ -139,10 +119,10 @@ public class JadwalKuliahTest {
 
 
     /**
-     * Test of getLokasi method, of class JadwalKuliah.
+     * Method yang menguji getter dan setter atribut lokasi (ruangan) dalam JadwalKuliah
      */
     @Test
-    public void testSetGetLokasiValid() {
+    public void testSetGetLokasi() {
         JadwalKuliah instance = new JadwalKuliah();
         instance.setLokasi("09122");
         String expResult = "09122";
@@ -152,7 +132,7 @@ public class JadwalKuliahTest {
 
 
     /**
-     * Test of setPengajar method, of class JadwalKuliah.
+     * Method yang menguji setter atribut pengajar dari JadwalKuliah
      */
     @Test
     public void testSetPengajar() {
@@ -164,7 +144,7 @@ public class JadwalKuliahTest {
     }
     
     /**
-     * Test getPengajar, of class JadwalKuliah
+     * Method yang menguji getter atribut pengajar dari JadwalKuliah
      */
     @Test
     public void testGetPengajar(){
@@ -174,7 +154,8 @@ public class JadwalKuliahTest {
     }
 
     /**
-     * Test of getWaktuString method, of class JadwalKuliah.
+     * Method yang menguji setter waktu JadwalKuliah dan getter yang 
+     * dari waktu (dalam bentuk string HH:MM-HH:MM)
      */
     @Test
     public void testSetGetWaktuString() {
@@ -187,16 +168,36 @@ public class JadwalKuliahTest {
     }
 
     /**
-     * Test of indonesianToDayOfWeek method, of class JadwalKuliah.
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "" (String kosong)
      */
     @Test
-    public void testIndonesianToDayOfWeekDefaul() {
+    public void testIndonesianToDayOfWeekKosong() {
         String indonesian = "";
         DayOfWeek expResult = null;
         DayOfWeek result = JadwalKuliah.indonesianToDayOfWeek(indonesian);
         assertEquals(expResult, result);
     }
     
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "adwrg" (hari yang tidak valid)
+     */
+    @Test
+    public void testIndonesianToDayOfWeekInvalid() {
+        String indonesian = "adgwrg";
+        DayOfWeek expResult = null;
+        DayOfWeek result = JadwalKuliah.indonesianToDayOfWeek(indonesian);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "senin"
+     */
     @Test
     public void testIndonesianToDayOfWeekSenin() {
         String indonesian = "senin";
@@ -205,30 +206,50 @@ public class JadwalKuliahTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "selasa"
+     */
     @Test
     public void testIndonesianToDayOfWeekSelasa() {
-        String indonesian = "selasa";
+        String indonesian = "sElAsa";
         DayOfWeek expResult = DayOfWeek.TUESDAY;
         DayOfWeek result = JadwalKuliah.indonesianToDayOfWeek(indonesian);
         assertEquals(expResult, result);
     }
     
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "Rabu"
+     */
     @Test
     public void testIndonesianToDayOfWeekRabu() {
-        String indonesian = "rabu";
+        String indonesian = "Rabu";
         DayOfWeek expResult = DayOfWeek.WEDNESDAY;
         DayOfWeek result = JadwalKuliah.indonesianToDayOfWeek(indonesian);
         assertEquals(expResult, result);
     }
     
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "KAMIS"
+     */    
     @Test
     public void testIndonesianToDayOfWeekKamis() {
-        String indonesian = "kamis";
+        String indonesian = "KAMIS";
         DayOfWeek expResult = DayOfWeek.THURSDAY;
         DayOfWeek result = JadwalKuliah.indonesianToDayOfWeek(indonesian);
         assertEquals(expResult, result);
     }
     
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "jumat"
+     */
     @Test
     public void testIndonesianToDayOfWeekJumat() {
         String indonesian = "jumat";
@@ -237,6 +258,11 @@ public class JadwalKuliahTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "sabtu"
+     */
     @Test
     public void testIndonesianToDayOfWeekSabtu() {
         String indonesian = "sabtu";
@@ -245,6 +271,11 @@ public class JadwalKuliahTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
+     * ke dalam bahasa Inggris
+     * @Input "minggu"
+     */
     @Test
     public void testIndonesianToDayOfWeekMinggu() {
         String indonesian = "minggu";
