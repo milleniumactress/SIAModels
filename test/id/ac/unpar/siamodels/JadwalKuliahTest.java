@@ -16,16 +16,15 @@ import id.ac.unpar.siamodels.matakuliah.kurikulum2018.*;
  * @author Richard
  */
 public class JadwalKuliahTest {
-        
-    private JadwalKuliah jadwal;
-    
+        JadwalKuliah jk = new JadwalKuliah(mataKuliah,'A',d,"Senin","08.00-10.00","9017");
+        Dosen d = new Dosen("12345678","abc");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
+    @Test
+    public void testConstructorJadwalKuliah() {
+        MataKuliah mataKuliah = mkf.createMataKuliah("AIF131101");
     /**
-     * Constructor yang menginisialisasi atribut-atribut yang diperlukan untuk test
+     * Test of constructor, of class JadwalKuliah.
      */
-    public JadwalKuliahTest() {
-        
-        this.jadwal = new JadwalKuliah(new MataKuliah("AIF183114","Algoritma Kriptografi",3), 'A', 
-                new Dosen("20000001","Anton Sudardjo"), "Senin", "08:00-11:00","09122");
     }
     
     /**
@@ -51,6 +50,39 @@ public class JadwalKuliahTest {
         JadwalKuliah instance = new JadwalKuliah();
         instance.setMataKuliah(mataKuliah);
         MataKuliah expected = new AIF131101();
+        assertEquals(expected,instance.getMataKuliah());
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+    @Test
+    public void testSetGetMataKuliahWajib2018() {
+        System.out.println("setMataKuliahWajib2018");
+        MataKuliah mataKuliah = new AIF181100();
+        JadwalKuliah instance = new JadwalKuliah();
+        instance.setMataKuliah(mataKuliah);
+        MataKuliah expected = new AIF181100();
+        assertEquals(expected,instance.getMataKuliah());
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+    @Test
+    public void testSetGetMataKuliahPilihan() {
+        System.out.println("setMataKuliahPilihan");
+        MataKuliah mataKuliah = new AIF184121();
+        JadwalKuliah instance = new JadwalKuliah();
+        instance.setMataKuliah(mataKuliah);
+        MataKuliah expected = new AIF184121();
+        assertEquals(expected,instance.getMataKuliah());
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+    @Test
+    public void testSetGetMataKuliahUmum() {
+        System.out.println("setMataKuliahUmum");
+        MataKuliah mataKuliah = new MKU180370();
+        JadwalKuliah instance = new JadwalKuliah();
+        instance.setMataKuliah(mataKuliah);
+        MataKuliah expected = new MKU180370();
         assertEquals(expected,instance.getMataKuliah());
         // TODO review the generated test code and remove the default call to fail.
     }
