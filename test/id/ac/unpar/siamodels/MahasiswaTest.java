@@ -16,6 +16,9 @@ import id.ac.unpar.siamodels.matakuliah.AIF201;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131101;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131102;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131105;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131106;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131181;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131191;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -35,6 +38,22 @@ import static org.junit.Assert.*;
  * @author Muhammad Ravi
  */
 public class MahasiswaTest {
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
     
     /**
      * Tes menghitung Indeks Prestasi (IP) yang telah ditempuh dan semuanya lulus.
@@ -188,10 +207,17 @@ public class MahasiswaTest {
     @Test
     public void testCalculateIPS() {
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "C"));//3
-        double expResult = 42.0 / 13.0;
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(),"B+"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131106(),"B"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131181(),"B-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131181(),"C+"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"C"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"C-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"D"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"E"));
+        double expResult = 1.1675;
         double result = instance.calculateIPS();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
@@ -242,10 +268,17 @@ public class MahasiswaTest {
     public void testCalculateSKSTempuh() {
         boolean lulusSaja = false;
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B"));//4
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "C"));//3
-        int expResult = 13;
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(),"B+"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131106(),"B"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131181(),"B-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131181(),"C+"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"C"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"C-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"D"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131191(),"E"));
+        int expResult = 22;
         int result = instance.calculateSKSTempuh(lulusSaja);
         assertEquals(expResult, result);
     }
@@ -301,7 +334,7 @@ public class MahasiswaTest {
     public void testHasLulusKuliah() {
         String kodeMataKuliah = "AIF101";
         Mahasiswa instance = new Mahasiswa("2016730041");
-        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF101(),"E"));//6 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"E"));//6 
         boolean expResult = false;
         boolean result = instance.hasLulusKuliah(kodeMataKuliah);
         assertEquals(expResult, result);
@@ -381,19 +414,148 @@ public class MahasiswaTest {
         assertEquals(expResult, result);
     }
 
+
+    /**
+     * Test mengambil nilai akhir mata kuliah
+     */
+    @Test
+    public void testGetNilaiAkhirMataKuliah() {
+        String kodeMataKuliah = "AIF131101";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131106(),"B+")); 
+        Double expResult = 4.0;
+        Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+    }
+
+//    /**
+//     * Test of hasTempuhKuliah method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testHasTempuhKuliah() {
+//        System.out.println("hasTempuhKuliah");
+//        String kodeMataKuliah = "";
+//        Mahasiswa instance = null;
+//        boolean expResult = false;
+//        boolean result = instance.hasTempuhKuliah(kodeMataKuliah);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getTahunAngkatan method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testGetTahunAngkatan() {
+//        System.out.println("getTahunAngkatan");
+//        Mahasiswa instance = null;
+//        int expResult = 0;
+//        int result = instance.getTahunAngkatan();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+    /**
+     * Test of toString method, of class Mahasiswa.
+     */
+    @Test
+    public void testToString() {
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.setNama("abcd");
+        String expResult = "Mahasiswa [npm=2016730041, nama=abcd]";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+//    
+//       /**
+//     * Test of getJadwalKuliahList method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testGetJadwalKuliahList() {
+//        System.out.println("getJadwalKuliahList");
+//        Mahasiswa instance = null;
+//        List<JadwalKuliah> expResult = null;
+//        List<JadwalKuliah> result = instance.getJadwalKuliahList();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//
 //    /**
 //     * Test of getRiwayatNilai method, of class Mahasiswa.
 //     */
 //    @Test
 //    public void testGetRiwayatNilai() {
-//        List<Mahasiswa.Nilai> listNilai=new LinkedList<>();
-//        listNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"),new AIF131101(),"A"));
-//        
-//        Mahasiswa instance = new Mahasiswa("2016730041");
-//        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"),new AIF131101(),"A"));
-//        List<Mahasiswa.Nilai> expResult = listNilai;
+//        System.out.println("getRiwayatNilai");
+//        Mahasiswa instance = null;
+//        List<Mahasiswa.Nilai> expResult = null;
 //        List<Mahasiswa.Nilai> result = instance.getRiwayatNilai();
 //        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getNilaiTOEFL method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testGetNilaiTOEFL() {
+//        System.out.println("getNilaiTOEFL");
+//        Mahasiswa instance = null;
+//        SortedMap<LocalDate, Integer> expResult = null;
+//        SortedMap<LocalDate, Integer> result = instance.getNilaiTOEFL();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of calculateIPKLulus method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testCalculateIPKLulus() {
+//        System.out.println("calculateIPKLulus");
+//        Mahasiswa instance = null;
+//        double expResult = 0.0;
+//        double result = instance.calculateIPKLulus();
+//        assertEquals(expResult, result, 0.0);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of calculateIPLulus method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testCalculateIPLulus() {
+//        System.out.println("calculateIPLulus");
+//        Mahasiswa instance = null;
+//        double expResult = 0.0;
+//        double result = instance.calculateIPLulus();
+//        assertEquals(expResult, result, 0.0);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of calculateIPKTempuh method, of class Mahasiswa.
+//     */
+//    @Test
+//    public void testCalculateIPKTempuh() {
+//        System.out.println("calculateIPKTempuh");
+//        boolean lulusSaja = false;
+//        Mahasiswa instance = null;
+//        double expResult = 0.0;
+//        double result = instance.calculateIPKTempuh(lulusSaja);
+//        assertEquals(expResult, result, 0.0);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
 //    }
 
 }
