@@ -110,4 +110,18 @@ public class MataKuliahFactoryTest {
         String result = mk.getKode();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of createMataKuliah method, of class MataKuliahFactory.
+     */
+    @Test
+    public void testCreateMataKuliah_3args2() {
+        String kode = "AIF13110123";
+        int sks = 7;
+        String nama = "abcdefgh";
+        MataKuliahFactory instance = MataKuliahFactory.getInstance();
+        MataKuliah result = instance.createMataKuliah(kode, sks, nama);
+        MataKuliah expResult = instance.createMataKuliah("AIF13110123");
+        assertEquals(expResult, result);
+    }
 }
