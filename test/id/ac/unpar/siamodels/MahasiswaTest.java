@@ -39,22 +39,6 @@ import static org.junit.Assert.*;
  */
 public class MahasiswaTest {
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
     /**
      * Tes menghitung Indeks Prestasi (IP) yang telah ditempuh dan semuanya lulus.
      */
