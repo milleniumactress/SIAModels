@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  */
 public class DosenTest {
     /**
-     * Test of constuctor, of class Dosen.
+     * Test constructor dari kelas Dosen
      */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorDosen() {
@@ -34,7 +34,7 @@ public class DosenTest {
     }
 
     /**
-     * Test of getNik method, of class Dosen.
+     * Test method getNik dari kelas Dosen
      */
     @Test
     public void testGetNik() {
@@ -45,7 +45,7 @@ public class DosenTest {
     }
 
     /**
-     * Test of setNik method, of class Dosen.
+     * Test method setNik dari kelas Dosen
      */
     @Test
     public void testSetNik() {
@@ -56,7 +56,7 @@ public class DosenTest {
     }
 
     /**
-     * Test of getNama method, of class Dosen.
+     * Test method getNama dari kelas Dosen
      */
     @Test
     public void testGetNama() {
@@ -67,7 +67,7 @@ public class DosenTest {
     }
 
     /**
-     * Test of setNama method, of class Dosen.
+     * Test method setNama dari kelas Dosen
      */
     @Test
     public void testSetNama() {
@@ -78,7 +78,7 @@ public class DosenTest {
     }
 
     /**
-     * Test of equals method, of class Dosen.
+     * Test method equals dari kelas Dosen, dibandingkan dengan objek yang sama
      */
     @Test
     public void testEqualsObjSama() {
@@ -90,7 +90,7 @@ public class DosenTest {
     }
     
     /**
-     * Test of equals method, of class Dosen.
+     * Test method equals dari kelas Dosen, dibandingkan dengan objek null
      */
     @Test
     public void testEqualsObjNull() {
@@ -102,7 +102,7 @@ public class DosenTest {
     }
     
     /**
-     * Test of equals method, of class Dosen.
+     * Test method equals dari kelas Dosen, dibandingkan dengan objek yang kelasnya beda
      */
     @Test
     public void testEqualsObjBedaKelas() {
@@ -114,7 +114,7 @@ public class DosenTest {
     }
     
     /**
-     * Test of equals method, of class Dosen.
+     * Test method equals dari kelas Dosen, dibandingkan dengan objek yang namanya null
      */
     @Test
     public void testEqualsObjNamaNull() {
@@ -126,7 +126,7 @@ public class DosenTest {
     }
     
     /**
-     * Test of equals method, of class Dosen.
+     * Test method equals dari kelas Dosen, dibandingkan dengan objek yang niknya null
      */
     @Test
     public void testEqualsObjNIKNull() {
