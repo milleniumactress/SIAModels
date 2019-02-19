@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class TahunSemesterTest {
     /**
-     * Test of constructor, of class TahunSemester.
+     * Test constructor dari kelas TahunSemester, dengan input semester yang tidak valid
      */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorTahunSemesterInvalid() {
@@ -26,18 +26,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of constructor, of class TahunSemester.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetSemesterInvalid() {
-        TahunSemester instance = new TahunSemester("169");
-        Semester sm = instance.getSemester();
-        Semester expResult = null;
-        assertEquals(expResult, sm);
-    }
-    
-    /**
-     * Test of constructor with 2 parametres, of class TahunSemester.
+     * Test constructor dari kelas TahunSemester yang dua parameter, dengan input semester ganjil
      */
     @Test
     public void testConstructorSemesterGanjil() {
@@ -46,7 +35,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of constructor with 2 parametres, of class TahunSemester.
+     * Test constructor dari kelas TahunSemester yang dua parameter, dengan input semester genap
      */
     @Test
     public void testConstructorSemesterGenap() {
@@ -55,7 +44,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of constructor with 2 parametres, of class TahunSemester.
+     * Test constructor dari kelas TahunSemester yang dua parameter, dengan input semester pendek
      */
     @Test
     public void testConstructorSemesterPendek() {
@@ -64,16 +53,16 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of constructor with 2 parametres, of class TahunSemester.
+     * Test constructor dari kelas TahunSemester yang dua parameter, dengan input semester unknown5
      */
     @Test
-    public void testConstructorSemesterUnkown5() {
+    public void testConstructorSemesterUnknown5() {
         Semester sm = Semester.UNKNOWN5;
         TahunSemester ts = new TahunSemester(2016,sm);
     }
     
     /**
-     * Test of constructor with 2 parametres, of class TahunSemester.
+     * Test constructor dari kelas TahunSemester yang dua parameter, dengan input semester transfer
      */
     @Test
     public void testConstructorSemesterTransfer() {
@@ -82,7 +71,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of getSemester method, of class TahunSemester.
+     * Test method getSemester dari kelas TahunSemester, dengan mengembalikan semester ganjil
      */
     @Test
     public void testGetSemesterGanjil() {
@@ -93,7 +82,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of getSemester method, of class TahunSemester.
+     * Test method getSemester dari kelas TahunSemester, dengan mengembalikan semester genap
      */
     @Test
     public void testGetSemesterGenap() {
@@ -104,7 +93,7 @@ public class TahunSemesterTest {
     }
     
      /**
-     * Test of getSemester method, of class TahunSemester.
+     * Test method getSemester dari kelas TahunSemester, dengan mengembalikan semester pendek
      */
     @Test
     public void testGetSemesterPendek() {
@@ -115,10 +104,10 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of getSemester method, of class TahunSemester.
+     * Test method getSemester dari kelas TahunSemester, dengan mengembalikan semester unknown5
      */
     @Test
-    public void testGetSemesterUnkown5() {
+    public void testGetSemesterUnknown5() {
         TahunSemester instance = new TahunSemester("165");
         Semester expResult = Semester.UNKNOWN5;
         Semester result = instance.getSemester();
@@ -126,7 +115,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of getSemester method, of class TahunSemester.
+     * Test method getSemester dari kelas TahunSemester, dengan mengembalikan semester transfer
      */
     @Test
     public void testGetSemesterTransfer() {
@@ -135,9 +124,20 @@ public class TahunSemesterTest {
         Semester result = instance.getSemester();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test method getSemester dari kelas TahunSemester, dengan input semester yang tidak valid
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetSemesterInvalid() {
+        TahunSemester instance = new TahunSemester("169");
+        Semester sm = instance.getSemester();
+        Semester expResult = null;
+        assertEquals(expResult, sm);
+    }
 
     /**
-     * Test of getTahun method, of class TahunSemester.
+     * Test method getTahun dari kelas TahunSemester
      */
     @Test
     public void testGetTahun() {
@@ -148,7 +148,7 @@ public class TahunSemesterTest {
     }
 
     /**
-     * Test of getKodeDPS method, of class TahunSemester.
+     * Test method getKodeDPS dari kelas TahunSemester
      */
     @Test
     public void testGetKodeDPS() {
@@ -159,7 +159,7 @@ public class TahunSemesterTest {
     }
 
     /**
-     * Test of compareTo method, of class TahunSemester.
+     * Test method compareTo dari kelas TahunSemester, dengan TahunSemester yang dibandingkan tahunnya lebih kecil
      */
     @Test
     public void testCompareToTahunLebihKecil() {
@@ -171,7 +171,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of compareTo method, of class TahunSemester.
+     * Test method compareTo dari kelas TahunSemester, dengan TahunSemester yang dibandingkan tahunnya lebih besar
      */
     @Test
     public void testCompareToTahunLebihBesar() {
@@ -183,7 +183,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of compareTo method, of class TahunSemester.
+     * Test method compareTo dari kelas TahunSemester, dengan TahunSemester yang dibandingkan ordernya lebih besar
      */
     @Test
     public void testCompareToOrderLebihBesar() {
@@ -195,7 +195,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of compareTo method, of class TahunSemester.
+     * Test method compareTo dari kelas TahunSemester, dengan TahunSemester yang dibandingkan ordernya lebih kecil
      */
     @Test
     public void testCompareToOrderLebihKecil() {
@@ -207,7 +207,7 @@ public class TahunSemesterTest {
     }
 
     /**
-     * Test of equals method, of class TahunSemester.
+     * Test method equals dari kelas TahunSemester, dengan objek yang dibandingkan beda instance
      */
     @Test
     public void testEqualsBedaInstance() {
@@ -219,7 +219,7 @@ public class TahunSemesterTest {
     }
     
     /**
-     * Test of equals method, of class TahunSemester.
+     * Test method equals dari kelas TahunSemester, dengan objek yang dibandingkan beda tahun
      */
     @Test
     public void testEqualsBedaTahun() {
@@ -231,7 +231,7 @@ public class TahunSemesterTest {
     }
 
     /**
-     * Test of toString method, of class TahunSemester.
+     * Test method toString dari kelas TahunSemester
      */
     @Test
     public void testToString() {
