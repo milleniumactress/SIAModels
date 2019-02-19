@@ -51,36 +51,6 @@ public class JadwalKuliahTest {
         MataKuliah expected = new AIF131101();
         assertEquals(expected,instance.getMataKuliah());
     }
-    
-    @Test
-    public void testSetGetMataKuliahWajib2018() {
-        System.out.println("setMataKuliahWajib2018");
-        MataKuliah mataKuliah = new AIF181100();
-        JadwalKuliah instance = new JadwalKuliah();
-        instance.setMataKuliah(mataKuliah);
-        MataKuliah expected = new AIF181100();
-        assertEquals(expected,instance.getMataKuliah());
-    }
-    
-    @Test
-    public void testSetGetMataKuliahPilihan() {
-        System.out.println("setMataKuliahPilihan");
-        MataKuliah mataKuliah = new AIF184121();
-        JadwalKuliah instance = new JadwalKuliah();
-        instance.setMataKuliah(mataKuliah);
-        MataKuliah expected = new AIF184121();
-        assertEquals(expected,instance.getMataKuliah());
-    }
-    
-    @Test
-    public void testSetGetMataKuliahUmum() {
-        System.out.println("setMataKuliahUmum");
-        MataKuliah mataKuliah = new MKU180370();
-        JadwalKuliah instance = new JadwalKuliah();
-        instance.setMataKuliah(mataKuliah);
-        MataKuliah expected = new MKU180370();
-        assertEquals(expected,instance.getMataKuliah());
-    }
 
     /**
      * Method yang menguji getter dan setter dari atribut kelas dari JadwalKuliah
@@ -197,8 +167,7 @@ public class JadwalKuliahTest {
 
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "" (String kosong)
+     * ke dalam bahasa Inggris dengan masukan null (kosong)
      */
     @Test
     public void testIndonesianToDayOfWeekKosong() {
@@ -210,8 +179,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "adwrg" (hari yang tidak valid)
+     * ke dalam bahasa Inggris dengan masukan tidak valid
      */
     @Test
     public void testIndonesianToDayOfWeekInvalid() {
@@ -223,8 +191,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "senin"
+     * ke dalam bahasa Inggris dengan masukan "senin"
      */
     @Test
     public void testIndonesianToDayOfWeekSenin() {
@@ -236,8 +203,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "selasa"
+     * ke dalam bahasa Inggris dengan masukan "sElAsa"
      */
     @Test
     public void testIndonesianToDayOfWeekSelasa() {
@@ -249,8 +215,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "Rabu"
+     * ke dalam bahasa Inggris dengan masukan "Rabu"
      */
     @Test
     public void testIndonesianToDayOfWeekRabu() {
@@ -262,8 +227,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "KAMIS"
+     * ke dalam bahasa Inggris dengan masukan "KAMIS"
      */    
     @Test
     public void testIndonesianToDayOfWeekKamis() {
@@ -275,8 +239,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "jumat"
+     * ke dalam bahasa Inggris dengan masukan "jumat"
      */
     @Test
     public void testIndonesianToDayOfWeekJumat() {
@@ -288,8 +251,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "sabtu"
+     * ke dalam bahasa Inggris dengan masukan "sabtu"
      */
     @Test
     public void testIndonesianToDayOfWeekSabtu() {
@@ -301,8 +263,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang memeriksa method yang menerjemahkan hari JadwalKuliah
-     * ke dalam bahasa Inggris
-     * @Input "minggu"
+     * ke dalam bahasa Inggris dengan masukan "minggu"
      */
     @Test
     public void testIndonesianToDayOfWeekMinggu() {
