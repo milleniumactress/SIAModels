@@ -28,7 +28,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang menguji metode setMataKuliah() dan getMataKuliah()
-     * @Input null
+     * dengan masukan null (kosong)
      */
     @Test
     public void testSetGetMataKuliahNull() {
@@ -41,7 +41,7 @@ public class JadwalKuliahTest {
     
     /**
      * Method yang menguji getter dan setter Matakuliah dalam JadwalKuliah
-     * @Input AIF131101 (Matakuliah yang valid)
+     * dengan masukan AIF131101 (Matakuliah yang valid)
      */
     @Test
     public void testSetGetMataKuliah() {
@@ -54,7 +54,7 @@ public class JadwalKuliahTest {
 
     /**
      * Method yang menguji getter dan setter dari atribut kelas dari JadwalKuliah
-     * @Input null
+     * dengan masukan null
      */
     @Test
     public void testSetGetKelasNull() {
@@ -66,7 +66,7 @@ public class JadwalKuliahTest {
 
     /**
      * Method yang menguji getter dan setter atribut kelas dari JadwalKuliah
-     * @Input 'A' (kelas yang valid)
+     * dengan masukan 'A' (kelas yang valid)
      */
     @Test
     public void testSetGetKelasValid() {
