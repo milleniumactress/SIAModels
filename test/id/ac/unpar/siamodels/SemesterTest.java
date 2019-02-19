@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  *
  * @author i16050
  */
-public class SemesterTes {
+public class SemesterTest {
     /**
      * Test of values method, of class Semester.
      */
