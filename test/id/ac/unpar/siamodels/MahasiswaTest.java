@@ -539,17 +539,17 @@ public class MahasiswaTest {
         assertEquals(expResult, result, 0.0);
     }
 
-    /**
-     * Tes untuk Menghitung IP mahasiswa sampai saat ini.
-     * dengan aturan semua nilai, termasuk yang tidak lulus, dihitung
-     */
-    @Test
-    public void testCalculateIPKTempuh() {
-        boolean lulusSaja = false;
-        Mahasiswa instance = null;
-        double expResult = 0.0;
-        double result = instance.calculateIPKTempuh(lulusSaja);
-        assertEquals(expResult, result, 0.0);
-    }
+//    /**
+//     * Tes untuk Menghitung IP mahasiswa sampai saat ini.
+//     * dengan aturan semua nilai, termasuk yang tidak lulus, dihitung
+//     */
+//    @Test
+//    public void testCalculateIPKTempuh() {
+//        boolean lulusSaja = false;
+//        Mahasiswa instance = null;
+//        double expResult = 0.0;
+//        double result = instance.calculateIPKTempuh(lulusSaja);
+//        assertEquals(expResult, result, 0.0);
+//    }
 
 }
