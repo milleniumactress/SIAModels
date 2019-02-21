@@ -7,7 +7,7 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Project" default="default" basedir=".">
+<project name="Project" default="default" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
     <description>Builds, tests, and runs the project Project.</description>
     <import file="nbproject/build-impl.xml"/>
     <property name="src.dir" location="."/>
@@ -19,7 +19,21 @@
     <property name="target.classes.test.dir" location="${target.dir}/test/classes"/>
  
     <property name="target.report.dir" location="${target.dir}/report"/>
- 
+    
+    
+    <property name="result.dir" location="./target" />
+    <property name="result.classes.dir" location="${result.dir}/classes" />
+    <property name="result.report.dir" location="${result.dir}/site/jacoco" />
+    <property name="result.exec.file" location="${result.dir}/jacoco.exec" />
+    
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="lib/jacocoant.jar" />
+    </taskdef>
+
+    <target name="clean">
+        <delete dir="${result.dir}" />
+    </target>
+    
     <target name="compile.java">
         <mkdir dir="${target.classes.java.dir}"/>
         <javac destdir="${target.classes.java.dir}" includeantruntime="false" >
@@ -58,6 +72,24 @@
                 <pathelement path="lib/junit-4.10.jar"/>
             </classpath>
         </junit>
+        
+        <jacoco:coverage destfile="${result.exec.file}">
+            <junit fork="true" printsummary="yes">
+                <formatter type="plain" usefile="false"/>
+                <formatter type="xml"/>
+                <batchtest todir="${target.report.dir}">
+                    <fileset dir="${src.test.dir}">
+                        <include name="**/*Test.java"/>
+                        <exclude name="**/Test*All.java"/>
+                    </fileset>
+                </batchtest>
+                <classpath>
+                    <pathelement location="${target.classes.java.dir}"/>
+                    <pathelement location="${target.classes.test.dir}"/>
+                    <pathelement path="lib/junit-4.10.jar"/>
+                </classpath>
+            </junit>
+        </jacoco:coverage>
     </target>
  
     <target name="report" depends="test">
@@ -68,5 +100,26 @@
             </fileset>
             <report todir="${target.report.dir}/html"/>
         </junitreport>
+        
+        <jacoco:report>
+            <!-- This task needs the collected execution data and ... -->
+            <executiondata>
+                <file file="${result.exec.file}" />
+            </executiondata>
+
+            <!-- the class files and optional source files ... -->
+            <structure name="JaCoCo Ant Example">
+                <classfiles>
+                    <fileset dir="dist/" />
+                </classfiles>
+            </structure>
+
+            <!-- to produce reports in different formats. -->
+            <html destdir="${result.report.dir}" />
+            <csv destfile="${result.report.dir}/report.csv" />
+            <xml destfile="${result.report.dir}/report.xml" />
+        </jacoco:report>
+        
     </target>
+    <target name="build" depends="clean,compile,test,report" />
 </project>

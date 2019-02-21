@@ -1090,7 +1090,7 @@ public class KelulusanTest {
     }
     
     /**
-     * Tes tidak lulus untuk mahasiswa angkatan 2016 yang mengambil toefl < 8 kali 
+     * Tes tidak lulus untuk mahasiswa angkatan 2016 yang mengambil toefl kurang dari 8 kali 
      * dan belum mendapat nilai 500
      */
     @Test
@@ -1182,8 +1182,8 @@ public class KelulusanTest {
     }
     
     /**
-     * Tes lulus untuk mahasiswa angkatan 2016 dan sudah mengambil toefl >= 8
-     * dan nilai terbaiknya >= 450
+     * Tes lulus untuk mahasiswa angkatan 2016 dan sudah mengambil toefllebih dari 8
+     * dan nilai terbaiknya lebih dari 450
      */
     @Test
     public void testCheckPrasyaratLulusToeflDispensasi() {
@@ -1282,7 +1282,7 @@ public class KelulusanTest {
     }
     
     /**
-     * Tes tidak lulus untuk mahasiswa angkatan 2016 dan sudah mengambil toefl >= 8
+     * Tes tidak lulus untuk mahasiswa angkatan 2016 dan sudah mengambil toefl lebih dari 8
      * dan nilai terbaiknya masih dibawah 450
      */
     @Test
