@@ -21,7 +21,7 @@
     <property name="target.report.dir" location="${target.dir}/report"/>
     
     
-    <property name="result.dir" location="./target" />
+    <property name="result.dir" location="build/Testing Coverage" />
     <property name="result.classes.dir" location="${result.dir}/classes" />
     <property name="result.report.dir" location="${result.dir}/site/jacoco" />
     <property name="result.exec.file" location="${result.dir}/jacoco.exec" />
@@ -108,10 +108,14 @@
             </executiondata>
 
             <!-- the class files and optional source files ... -->
-            <structure name="JaCoCo Ant Example">
+            <structure name="JaCoCo Coverage SIA Models">
                 <classfiles>
                     <fileset dir="dist/" />
                 </classfiles>
+                <sourcefiles>
+                    <fileset dir="src/"/>
+                </sourcefiles>
+            
             </structure>
 
             <!-- to produce reports in different formats. -->
@@ -121,5 +125,5 @@
         </jacoco:report>
         
     </target>
-    <target name="build" depends="clean,compile,test,report" />
+    <!--    <target name="build" depends="clean,compile,test,report" />-->
 </project>
