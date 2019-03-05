@@ -6,6 +6,7 @@
 package id.ac.unpar.siamodels.prodi.teknikinformatika;
 
 import id.ac.unpar.siamodels.Mahasiswa;
+import id.ac.unpar.siamodels.MataKuliahFactory;
 import id.ac.unpar.siamodels.TahunSemester;
 import id.ac.unpar.siamodels.matakuliah.AIF101;
 import id.ac.unpar.siamodels.matakuliah.AIF102;
@@ -74,6 +75,15 @@ import id.ac.unpar.siamodels.matakuliah.kurikulum2018.MKU180240;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.MKU180250;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.MKU180360;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.MKU180380;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184110;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF183120;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184119;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184106;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184121;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184108;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184109;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184114;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF183116;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
@@ -93,6 +103,21 @@ import static org.junit.Assert.*;
  */
 public class KelulusanTest {
     
+    private int getSemester(int i)
+    {
+        if((i+1)%2==1)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+    
+    int tahun = 6;
+    int tempTahun = 0;
+    
     /**
      * Tes lulus untuk mahasiswa angkatan 2016
      * 1. Lulus 144 sks
@@ -105,80 +130,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratLulus2016() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -201,80 +213,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratLulus2017() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2017730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2017.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2017[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2017[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -297,80 +296,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratLulusDibawah2016() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2015730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -388,79 +374,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusMKWajibDibawah2016() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2015730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015.length-1;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length-1;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -478,77 +452,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusMKWajibEquivalenDibawah2016() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2015730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=1;i<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=1;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -566,86 +530,72 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusMKAgamaDibawah2016() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2015730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015.length-1;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2011_SAMPAI_2015[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length-1;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU130004(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
         mahasiswa.setNilaiTOEFL(nilaiTOEFL);
         Kelulusan instance = new Kelulusan();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.checkPrasyarat(mahasiswa, reasonsContainer);
         assertEquals(expResult, result);
     }
@@ -657,79 +607,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusMKWajib2017() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2017730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2017.length-1;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2017[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2017[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length-1;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -747,78 +685,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusMKWajibEquivalen2017() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2017730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=1;i<Kelulusan.WAJIB_ANGKATAN_2017.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2017[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2017[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=1;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -836,68 +763,64 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulus144SKS() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2017.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2017[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2017[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -916,79 +839,66 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakMengambilMKAgama() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -1006,79 +916,69 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusMKProyek() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183116(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184108(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184109(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184114(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
@@ -1097,80 +997,67 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusToeflDibawah500() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(499));
@@ -1189,91 +1076,73 @@ public class KelulusanTest {
     public void testCheckPrasyaratLulusToeflDispensasi() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 1), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 2), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 3), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 4), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 5), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 6), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 7), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 8), new Integer(450));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 9), new Integer(451));
+        for(int i=1;i<10;i++)
+        {
+            nilaiTOEFL.put(LocalDate.of(2000, 1, i), 450);
+        }
         mahasiswa.setNilaiTOEFL(nilaiTOEFL);
         Kelulusan instance = new Kelulusan();
         boolean expResult = true;
@@ -1289,91 +1158,73 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusToeflLebihDari8() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 1), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 2), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 3), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 4), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 5), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 6), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 7), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 8), new Integer(449));
-        nilaiTOEFL.put(LocalDate.of(2000, 1, 9), new Integer(449));
+        for(int i=1;i<10;i++)
+        {
+            nilaiTOEFL.put(LocalDate.of(2000, 1, i), 449);
+        }
         mahasiswa.setNilaiTOEFL(nilaiTOEFL);
         Kelulusan instance = new Kelulusan();
         boolean expResult = false;
@@ -1388,82 +1239,69 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusBelumToefl() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184001(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
-        //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
         
-//        TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
+        //semester 8
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
+        
+        TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         mahasiswa.setNilaiTOEFL(null);
         Kelulusan instance = new Kelulusan();
         boolean expResult = false;
@@ -1478,77 +1316,69 @@ public class KelulusanTest {
     public void testCheckPrasyaratTidakLulusSkripsi1() {
         List<String> reasonsContainer = new LinkedList<>();
         Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
         
-        //semester 1
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF181107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180110(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180120(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("161"), new MKU180130(), "A"));
+        for(int i=0;i<Kelulusan.WAJIB_ANGKATAN_2016.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB_ANGKATAN_2016[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB_ANGKATAN_2016[i][j]), "A"));
+            }   
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
-        //semester 2
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF131101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF132205(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181104(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new AIF181202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180240(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("162"), new MKU180250(), "A"));
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.WAJIB.length;i++)
+        {
+            for(int j=0;j<Kelulusan.WAJIB[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.WAJIB[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131102(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182007(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182101(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182103(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182105(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF182109(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180360(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
-        
-        //semester 4
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF132202(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF133315(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182100(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182106(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182210(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182302(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("172"), new AIF182308(), "A"));
-        
-        //semester 5
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF132206(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183107(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183111(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183201(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183209(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183303(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("181"), new AIF183305(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183116(), "A"));
         
         //semester 6
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183002(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183204(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183300(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182112(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183117(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184123(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184108(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184109(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF184114(), "A"));
         
         //semester 7
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184005(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184116(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184114(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184108(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184339(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184341(), "A"));
-
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184121(), "A"));
+        
         //semester 8
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184000(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF183348(), "A"));
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF181107(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
         nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
