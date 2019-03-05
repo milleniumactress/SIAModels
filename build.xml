@@ -39,6 +39,7 @@
         <javac destdir="${target.classes.java.dir}" debug="true">
             <src path="${src.java.dir}"/>
         </javac>
+        <jar destfile="./dist/Project.jar" />
     </target>
  
     <target name="compile.test">
