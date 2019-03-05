@@ -18,10 +18,10 @@
     <property name="target.classes.java.dir" location="${target.dir}/classes"/>
     <property name="target.classes.test.dir" location="${target.dir}/test/classes"/>
  
-    <property name="target.report.dir" location="${target.dir}/report"/>
+    <property name="target.report.dir" location="report/junit_report/"/>
     
     
-    <property name="result.dir" location="build/Testing Coverage" />
+    <property name="result.dir" location="report/Testing Coverage/"/>
     <property name="result.classes.dir" location="${result.dir}/classes" />
     <property name="result.report.dir" location="${result.dir}/site/jacoco" />
     <property name="result.exec.file" location="${result.dir}/jacoco.exec" />
@@ -36,15 +36,15 @@
     
     <target name="compile.java">
         <mkdir dir="${target.classes.java.dir}"/>
-        <javac destdir="${target.classes.java.dir}" debug="true">
+        <javac destdir="${target.classes.java.dir}" includeantruntime="false" debug="on">
             <src path="${src.java.dir}"/>
         </javac>
-        <jar destfile="./dist/Project.jar" />
+        <jar destfile="./dist/Project.jar" basedir="build/"/>
     </target>
  
     <target name="compile.test">
         <mkdir dir="${target.classes.test.dir}"/>
-        <javac destdir="${target.classes.test.dir}" debug="true" classpath="./dist/Project.jar">
+        <javac destdir="${target.classes.test.dir}" includeantruntime="false" debug="on" classpath="./dist/Project.jar">
             <src path="${src.test.dir}"/>
         </javac>
     </target>
