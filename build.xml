@@ -36,19 +36,15 @@
     
     <target name="compile.java">
         <mkdir dir="${target.classes.java.dir}"/>
-        <javac destdir="${target.classes.java.dir}" includeantruntime="false" >
+        <javac destdir="${target.classes.java.dir}" debug="true">
             <src path="${src.java.dir}"/>
         </javac>
     </target>
  
-    <target name="compile.test" depends="compile.java">
+    <target name="compile.test">
         <mkdir dir="${target.classes.test.dir}"/>
-        <javac destdir="${target.classes.test.dir}" includeantruntime="false" >
+        <javac destdir="${target.classes.test.dir}" debug="true" classpath="./dist/Project.jar">
             <src path="${src.test.dir}"/>
-            <classpath>
-                <pathelement location="${target.classes.java.dir}"/>
-                <pathelement path="lib/junit-4.10.jar"/>
-            </classpath>
         </javac>
     </target>
  
@@ -69,7 +65,6 @@
             <classpath>
                 <pathelement location="${target.classes.java.dir}"/>
                 <pathelement location="${target.classes.test.dir}"/>
-                <pathelement path="lib/junit-4.10.jar"/>
             </classpath>
         </junit>
         
@@ -86,7 +81,6 @@
                 <classpath>
                     <pathelement location="${target.classes.java.dir}"/>
                     <pathelement location="${target.classes.test.dir}"/>
-                    <pathelement path="lib/junit-4.10.jar"/>
                 </classpath>
             </junit>
         </jacoco:coverage>
@@ -110,11 +104,8 @@
             <!-- the class files and optional source files ... -->
             <structure name="JaCoCo Coverage SIA Models">
                 <classfiles>
-                    <fileset dir="dist/" />
+                    <fileset dir="build/classes" />
                 </classfiles>
-                <sourcefiles>
-                    <fileset dir="src/"/>
-                </sourcefiles>
             
             </structure>
 
