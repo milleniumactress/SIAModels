@@ -117,5 +117,5 @@
         </jacoco:report>
         
     </target>
-    <!--    <target name="build" depends="clean,compile,test,report" />-->
+    <target name="build" depends="clean,compile,test,report" />
 </project>
