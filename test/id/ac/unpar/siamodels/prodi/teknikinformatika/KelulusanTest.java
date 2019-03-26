@@ -84,6 +84,7 @@ import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184108;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184109;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF184114;
 import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF183116;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.MKU130003;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
@@ -259,7 +260,7 @@ public class KelulusanTest {
         }
         
         //semester 3
-        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU130003(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
         
         //semester 6
@@ -1378,6 +1379,92 @@ public class KelulusanTest {
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("191"), new AIF184121(), "A"));
         
         //semester 8
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
+        
+        TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
+        nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
+        mahasiswa.setNilaiTOEFL(nilaiTOEFL);
+        Kelulusan instance = new Kelulusan();
+        boolean expResult = false;
+        boolean result = instance.checkPrasyarat(mahasiswa, reasonsContainer);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Tes untuk mahasiswa dibawah angkatan 2017 yang belum mengambil MK wajib , dan MKU
+     */
+    @Test
+    public void testCheckPrasyaratTidakLulusMKU2016() {
+        List<String> reasonsContainer = new LinkedList<>();
+        Mahasiswa mahasiswa = new Mahasiswa("2016730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
+        
+        
+        //semester 3
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU180380(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
+        
+        //semester 6
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
+        
+        //semester 7
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
+        //semester 8
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
+        
+        TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
+        nilaiTOEFL.put(LocalDate.MIN, new Integer(600));
+        mahasiswa.setNilaiTOEFL(nilaiTOEFL);
+        Kelulusan instance = new Kelulusan();
+        boolean expResult = false;
+        boolean result = instance.checkPrasyarat(mahasiswa, reasonsContainer);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Tes tidak lulus untuk mahasiswa 2019 yang belum mengambil MK Wajib
+     */
+    @Test
+    public void testCheckPrasyaratTidakLulusMKWajib2019() {
+        List<String> reasonsContainer = new LinkedList<>();
+        Mahasiswa mahasiswa = new Mahasiswa("2019730041");
+        MataKuliahFactory mkf = MataKuliahFactory.getInstance();
+                
+        tahun = 6;
+        
+        for(int i=0;i<Kelulusan.MKU.length;i++)
+        {
+            for(int j=0;j<Kelulusan.MKU[i].length;j++)
+            {
+                mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("1" + tahun + getSemester(i)), mkf.createMataKuliah(Kelulusan.MKU[i][j]), "A"));
+            }
+            tempTahun++;
+            if(tempTahun==2)
+            {
+                tahun++;
+            }
+        }
+        
+        //semester 3
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new MKU130003(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184110(), "A"));
+        
+        //semester 6
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF183106(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF183120(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184108(), "A"));
+        
+        //semester 7
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184119(), "A"));
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184121(), "A"));
+        
+        //semester 8
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("192"), new AIF184004(), "A"));
         mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF184106(), "A"));
         
         TreeMap<LocalDate,Integer> nilaiTOEFL = new TreeMap<LocalDate,Integer>();
