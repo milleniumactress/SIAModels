@@ -107,7 +107,9 @@
                 <classfiles>
                     <fileset dir="build/classes" />
                 </classfiles>
-            
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${src.java.dir}" includes="**/*.java"/>
+                </sourcefiles>
             </structure>
 
             <!-- to produce reports in different formats. -->
