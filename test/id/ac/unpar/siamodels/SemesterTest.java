@@ -17,8 +17,10 @@ import static org.junit.Assert.*;
  * @author i16050
  */
 public class SemesterTest {
+
     /**
-     * Test of values method, of class Semester.
+     * Test method testValues dari kelas Semester, untuk melihat seluruh isi
+     * values pada kelas semester
      */
     @Test
     public void testValues() {
@@ -28,7 +30,8 @@ public class SemesterTest {
     }
 
     /**
-     * Test of valueOf method, of class Semester.
+     * Test method testValues dari kelas Semester, untuk melihat isi values dari
+     * UNKNOWN5
      */
     @Test
     public void testValueOfUnknown() {
@@ -38,6 +41,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method testValues dari kelas Semester, untuk melihat isi values dari
+     * PENDEK
+     */
     @Test
     public void testValueOfPendek() {
         String name = "PENDEK";
@@ -46,6 +53,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method testValues dari kelas Semester, untuk melihat isi values dari
+     * GANJIL
+     */
     @Test
     public void testValueOfGanjil() {
         String name = "GANJIL";
@@ -54,6 +65,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method testValues dari kelas Semester, untuk melihat isi values dari
+     * GENAP
+     */
     @Test
     public void testValueOfGenap() {
         String name = "GENAP";
@@ -62,6 +77,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method testValues dari kelas Semester, untuk melihat isi values dari
+     * TRANSFER
+     */
     @Test
     public void testValueOfTransfer() {
         String name = "TRANSFER";
@@ -71,7 +90,8 @@ public class SemesterTest {
     }
 
     /**
-     * Test of fromString method, of class Semester.
+     * Test method fromString dari kelas Semester, untuk melihat isi dari string
+     * dari UNKOWN5
      */
     @Test
     public void testFromStringUnknown() {
@@ -81,6 +101,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method fromString dari kelas Semester, untuk melihat isi dari string
+     * dari PENDEK
+     */
     @Test
     public void testFromStringPendek() {
         String text = "PENDEK";
@@ -89,6 +113,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method fromString dari kelas Semester, untuk melihat isi dari string
+     * dari GANJIL
+     */
     @Test
     public void testFromStringGanjil() {
         String text = "GANJIL";
@@ -97,6 +125,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method fromString dari kelas Semester, untuk melihat isi dari string
+     * dari GENAP
+     */
     @Test
     public void testFromStringGenap() {
         String text = "GENAP";
@@ -105,6 +137,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method fromString dari kelas Semester, untuk melihat isi dari string
+     * dari TRANSFER
+     */
     @Test
     public void testFromStringTransfer() {
         String text = "TRANSFER";
@@ -114,7 +150,8 @@ public class SemesterTest {
     }
 
     /**
-     * Test of getOrder method, of class Semester.
+     * Test method getOrder dari kelas Semester, dengan mengembalikan nilai dari
+     * UNKNOWN5
      */
     @Test
     public void testGetOrderUnknown() {
@@ -124,6 +161,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method getOrder dari kelas Semester, dengan mengembalikan nilai dari
+     * PENDEK
+     */
     @Test
     public void testGetOrderPendek() {
         Semester instance = Semester.fromString("PENDEK");
@@ -132,6 +173,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method getOrder dari kelas Semester, dengan mengembalikan nilai dari
+     * GANJIL
+     */
     @Test
     public void testGetOrderGanjil() {
         Semester instance = Semester.fromString("GANJIL");
@@ -140,6 +185,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method getOrder dari kelas Semester, dengan mengembalikan nilai dari
+     * GENAP
+     */
     @Test
     public void testGetOrderGenap() {
         Semester instance = Semester.fromString("GENAP");
@@ -148,6 +197,10 @@ public class SemesterTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test method getOrder dari kelas Semester, dengan mengembalikan nilai dari
+     * TRANSFER
+     */
     @Test
     public void testGetOrderTransfer() {
         Semester instance = Semester.fromString("TRANSFER");
