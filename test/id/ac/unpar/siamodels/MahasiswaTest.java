@@ -400,10 +400,10 @@ public class MahasiswaTest {
 
 
     /**
-     * Test mengambil nilai akhir mata kuliah
+     * Test mengambil nilai akhir mata kuliah nilai A
      */
     @Test
-    public void testGetNilaiAkhirMataKuliah() {
+    public void testGetNilaiAkhirMataKuliahA() {
         String kodeMataKuliah = "AIF131101";
         Mahasiswa instance = new Mahasiswa("2016730041");
         instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
@@ -415,7 +415,71 @@ public class MahasiswaTest {
         assertEquals(expResult, result);
     }
     
-        /**
+       /**
+     * Test mengambil nilai akhir mata kuliah nilai A min
+     */
+    @Test
+    public void testGetNilaiAkhirMataKuliahAMin() {
+        String kodeMataKuliah = "AIF131105";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131105(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131106(),"B+")); 
+        Double expResult = 3.67;
+        Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+    }
+    
+       /**
+     * Test mengambil nilai akhir mata kuliah nilai B Plus
+     */
+    @Test
+    public void testGetNilaiAkhirMataKuliahBPlus() {
+        String kodeMataKuliah = "AIF131106";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131105(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131106(),"B+")); 
+        Double expResult = 3.33;
+        Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+    }
+    
+           /**
+     * Test mengambil nilai akhir mata kuliah nilai B Min
+     */
+    @Test
+    public void testGetNilaiAkhirMataKuliahBMin() {
+        String kodeMataKuliah = "AIF131106";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131105(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131106(),"B-")); 
+        Double expResult = 2.67;
+        Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+    }
+    
+               /**
+     * Test mengambil nilai akhir mata kuliah nilai C plus
+     */
+    @Test
+    public void testGetNilaiAkhirMataKuliahCplus() {
+        String kodeMataKuliah = "AIF131101";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"C+")); 
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131102(),"B-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131105(),"A-"));
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131106(),"B-"));
+        Double expResult = 2.33;
+        Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+    }
+    
+    /**
      * Test mengambil nilai akhir mata kuliah jika nilai kosong
      */
     @Test
@@ -426,6 +490,21 @@ public class MahasiswaTest {
         Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
         assertEquals(expResult, result);
     }
+    
+        /**
+     * Test mengambil nilai akhir mata kuliah jika nilai kosong
+     */
+    @Test
+    public void testGetNilaiAkhirMataKuliahSalah() {
+        String kodeMataKuliah = "AIF131101";
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("171"), new AIF131106(),"K")); 
+        Double expResult = 0.0;
+        Double result = instance.getNilaiAkhirMataKuliah(kodeMataKuliah);
+        assertEquals(expResult, result);
+    }
+    
+
 
     /**
      * tes kuliah yang telah ditempuh mahasiswa jika true
@@ -481,19 +560,18 @@ public class MahasiswaTest {
         assertEquals(expResult, result);
     }
 //    
-//       /**
-//     * Test of getJadwalKuliahList method, of class Mahasiswa.
-//     */
-//    @Test
-//    public void testGetJadwalKuliahList() {
-//        System.out.println("getJadwalKuliahList");
-//        Mahasiswa instance = null;
-//        List<JadwalKuliah> expResult = null;
-//        List<JadwalKuliah> result = instance.getJadwalKuliahList();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test untuk get list Jadwal kuliah
+     */
+    @Test
+    public void testGetJadwalKuliahList() {
+        System.out.println("getJadwalKuliahList");
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        List<JadwalKuliah> expResult = null;
+        instance.setJadwalKuliahList(expResult);
+        List<JadwalKuliah> result = instance.getJadwalKuliahList();
+        assertEquals(expResult, result);
+    }
 
 
     /**
@@ -523,17 +601,5 @@ public class MahasiswaTest {
         assertEquals(expResult, result, 0.0);
     }
 
-//    /**
-//     * Tes untuk Menghitung IP mahasiswa sampai saat ini.
-//     * dengan aturan semua nilai, termasuk yang tidak lulus, dihitung
-//     */
-//    @Test
-//    public void testCalculateIPKTempuh() {
-//        boolean lulusSaja = false;
-//        Mahasiswa instance = null;
-//        double expResult = 0.0;
-//        double result = instance.calculateIPKTempuh(lulusSaja);
-//        assertEquals(expResult, result, 0.0);
-//    }
 
 }
