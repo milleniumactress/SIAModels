@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class AIF183107Test {
 
     /**
-     * Tes mahasiswa dapat mengambil matakuliah AIF181100
+     * Tes mahasiswa dapat mengambil matakuliah AIF183107
      */
     @Test
     public void testCheckPrasyaratTrue() {
@@ -38,7 +38,7 @@ public class AIF183107Test {
     }
     
     /**
-     * Tes mahasiswa tidak dapat mengambil matakuliah AIF181100.
+     * Tes mahasiswa tidak dapat mengambil matakuliah AIF183107.
      */
     @Test
     public void testCheckPrasyaratFalse() {
