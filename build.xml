@@ -21,11 +21,16 @@
     <property name="target.plan.dir" location="report/javadoc"/>
     <property name="target.report.dir" location="report/junit_report/"/>
     
+    <property name="junit" location="lib/junit-4.10.jar"/>
     
     <property name="result.dir" location="report/Testing Coverage/"/>
     <property name="result.classes.dir" location="${result.dir}/classes" />
     <property name="result.report.dir" location="${result.dir}/site/jacoco" />
     <property name="result.exec.file" location="${result.dir}/jacoco.exec" />
+    
+    <path id="classpath.test">
+        <pathelement location="${junit}" />
+    </path>
     
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="lib/jacocoant.jar" />
@@ -52,10 +57,10 @@
  
     <target name="compile" depends="compile.java,compile.test"/>
     
-    <target name="doc" description="generate documentation">
+<!--    <target name="doc" description="generate documentation">
         <mkdir dir="${target.plan.dir}"/>
         <javadoc sourcepath="${src.test.dir}" destdir="${target.plan.dir}"/>
-    </target>
+    </target>-->
  
     <target name="test" depends="compile">
         <mkdir dir="${target.report.dir}"/>
@@ -69,6 +74,8 @@
                     <exclude name="**/Test*All.java"/>
                 </fileset>
             </batchtest>
+            <classpath refid="classpath.test"/>
+            <classpath location="${junit}" />
             <classpath>
                 <pathelement location="${target.classes.java.dir}"/>
                 <pathelement location="${target.classes.test.dir}"/>
@@ -85,6 +92,8 @@
                         <exclude name="**/Test*All.java"/>
                     </fileset>
                 </batchtest>
+                <classpath refid="classpath.test"/>
+                <classpath location="${junit}" />
                 <classpath>
                     <pathelement location="${target.classes.java.dir}"/>
                     <pathelement location="${target.classes.test.dir}"/>
@@ -125,5 +134,5 @@
         </jacoco:report>
     </target>
     
-    <target name="build" depends="clean,compile,doc,test,report" />
+    <target name="build" depends="clean,compile,test,report" />
 </project>
