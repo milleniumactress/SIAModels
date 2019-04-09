@@ -9,7 +9,6 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="Project" default="default" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
     <description>Builds, tests, and runs the project Project.</description>
-    <import file="nbproject/build-impl.xml"/>
     <property name="src.dir" location="."/>
     <property name="src.java.dir" location="${src.dir}/src"/>
     <property name="src.test.dir" location="${src.dir}/test"/>
