@@ -21,8 +21,8 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.6.201602180812</version>
                 <configuration>
-                    <destFile>${basedir}/report/Testing Coverage/jacoco.exec</destFile>
-                    <dataFile>${basedir}/report/Testing Coverage/jacoco.exec</dataFile>
+                    <destFile>${basedir}jacoco.exec</destFile>
+                    <dataFile>${basedir}jacoco.exec</dataFile>
                 </configuration>
                 <executions>
                     <execution>
@@ -69,8 +69,8 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.6.201602180812</version>
                 <configuration>
-                    <destFile>${basedir}/report/Testing Coverage/jacoco.exec</destFile>
-                    <dataFile>${basedir}/report/Testing Coverage/jacoco.exec</dataFile>
+                    <destFile>${basedir}jacoco.exec</destFile>
+                    <dataFile>${basedir}jacoco.exec</dataFile>
                 </configuration>
             </plugin>
             <plugin>
