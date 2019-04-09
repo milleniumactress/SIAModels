@@ -31,10 +31,6 @@
     <path id="classpath.test">
         <pathelement location="${junit}" />
     </path>
-    
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-        <classpath path="lib/jacocoant.jar" />
-    </taskdef>
 
     <target name="clean">
         <delete dir="${result.dir}" />
@@ -57,10 +53,12 @@
  
     <target name="compile" depends="compile.java,compile.test"/>
     
-<!--    <target name="doc" description="generate documentation">
+    <target name="doc" description="generate documentation">
         <mkdir dir="${target.plan.dir}"/>
-        <javadoc sourcepath="${src.test.dir}" destdir="${target.plan.dir}"/>
-    </target>-->
+        <javadoc sourcepath="${src.test.dir}" destdir="${target.plan.dir}">
+            <classpath refid="classpath.test"/>
+        </javadoc>
+    </target>
  
     <target name="test" depends="compile">
         <mkdir dir="${target.report.dir}"/>
@@ -134,5 +132,5 @@
         </jacoco:report>
     </target>
     
-    <target name="build" depends="clean,compile,test,report" />
+    <target name="build" depends="clean,compile,doc,test,report" />
 </project>
