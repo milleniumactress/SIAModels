@@ -5,15 +5,9 @@
  */
 package id.ac.unpar.siamodels;
 
-import id.ac.unpar.siamodels.MataKuliah;
-import id.ac.unpar.siamodels.MataKuliahFactory;
-import id.ac.unpar.siamodels.matakuliah.AIF101;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *

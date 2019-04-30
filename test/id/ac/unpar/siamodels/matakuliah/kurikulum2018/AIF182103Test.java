@@ -5,14 +5,7 @@
  */
 package id.ac.unpar.siamodels.matakuliah.kurikulum2018;
 
-import id.ac.unpar.siamodels.Mahasiswa;
-import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

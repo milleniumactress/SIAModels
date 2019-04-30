@@ -7,14 +7,12 @@ package id.ac.unpar.siamodels.matakuliah.kurikulum2018;
 
 import id.ac.unpar.siamodels.Mahasiswa;
 import id.ac.unpar.siamodels.TahunSemester;
+import org.junit.Test;
+
 import java.util.LinkedList;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *
