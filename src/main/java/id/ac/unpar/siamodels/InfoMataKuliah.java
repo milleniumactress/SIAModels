@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface InfoMataKuliah {
-
     /**
      * Jumlah bobot sks dari mata kuliah ini
      *

@@ -4,7 +4,6 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 public class JadwalKuliah {
-
     protected MataKuliah mataKuliah;
     protected Character kelas;
     protected DayOfWeek hari;
@@ -15,7 +14,6 @@ public class JadwalKuliah {
 
     /**
      * Membuat jadwal kuliah baru
-     *
      * @param mataKuliah mata kuliah yang dibuat jadwalnya
      * @param kelas kelas kuliah atau null jika tidak tersedia
      * @param pengajar nama pengajar
@@ -100,28 +98,27 @@ public class JadwalKuliah {
 
     /**
      * Converts Indonesian day names to {@link DayOfWeek} enumeration.
-     *
      * @param indonesian the day name in Indonesian
      * @return {@link DayOfWeek} object or null if not found.
      */
     public static DayOfWeek indonesianToDayOfWeek(String indonesian) {
         switch (indonesian.toLowerCase()) {
-            case "senin":
-                return DayOfWeek.MONDAY;
-            case "selasa":
-                return DayOfWeek.TUESDAY;
-            case "rabu":
-                return DayOfWeek.WEDNESDAY;
-            case "kamis":
-                return DayOfWeek.THURSDAY;
-            case "jumat":
-                return DayOfWeek.FRIDAY;
-            case "sabtu":
-                return DayOfWeek.SATURDAY;
-            case "minggu":
-                return DayOfWeek.SUNDAY;
-            default:
-                return null;
+        case "senin":
+            return DayOfWeek.MONDAY;
+        case "selasa":
+            return DayOfWeek.TUESDAY;
+        case "rabu":
+            return DayOfWeek.WEDNESDAY;
+        case "kamis":
+            return DayOfWeek.THURSDAY;
+        case "jumat":
+            return DayOfWeek.FRIDAY;
+        case "sabtu":
+            return DayOfWeek.SATURDAY;
+        case "minggu":
+            return DayOfWeek.SUNDAY;
+        default:
+            return null;
         }
     }
 }
