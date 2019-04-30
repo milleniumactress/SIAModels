@@ -5,11 +5,13 @@
  */
 package id.ac.unpar.siamodels;
 
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131101;
+import org.junit.Test;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import id.ac.unpar.siamodels.matakuliah.kurikulum2018.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Kelas yang menguji kelas JadwalKuliah

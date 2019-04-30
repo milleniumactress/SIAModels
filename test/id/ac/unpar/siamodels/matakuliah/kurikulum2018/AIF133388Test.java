@@ -7,7 +7,8 @@ package id.ac.unpar.siamodels.matakuliah.kurikulum2018;
 
 import id.ac.unpar.siamodels.MataKuliah;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *

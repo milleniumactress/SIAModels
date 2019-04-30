@@ -5,33 +5,14 @@
  */
 package id.ac.unpar.siamodels;
 
-import id.ac.unpar.siamodels.matakuliah.AIF101;
-import id.ac.unpar.siamodels.matakuliah.AIF102;
-import id.ac.unpar.siamodels.matakuliah.AIF103;
-import id.ac.unpar.siamodels.matakuliah.AIF104;
-import id.ac.unpar.siamodels.matakuliah.AIF105;
-import id.ac.unpar.siamodels.matakuliah.AIF106;
-import id.ac.unpar.siamodels.matakuliah.AIF181;
-import id.ac.unpar.siamodels.matakuliah.AIF201;
-import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131101;
-import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131102;
-import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131105;
-import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131106;
-import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131181;
-import id.ac.unpar.siamodels.matakuliah.kurikulum2018.AIF131191;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.LinkedList;
+import id.ac.unpar.siamodels.matakuliah.kurikulum2018.*;
+import org.junit.Test;
+
 import java.util.List;
 import java.util.Set;
-import java.util.SortedMap;
 import java.util.TreeSet;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *
