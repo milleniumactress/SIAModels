@@ -1,4 +1,7 @@
 *.class
+build.xml
+manifest.mf
+build.sbt
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -20,3 +23,14 @@ target/
 /SIAModels (NetBeans ver.)/nbproject/private/
 /JUnit v4.10 (TEST)/nbproject/private/
 /JUnit v4.10 (TEST)/build/
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+.jacocoverage/
+report/
