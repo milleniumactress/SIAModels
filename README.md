@@ -21,3 +21,4 @@ Dengan menggunakan command $ mvn package, dan filenya bisa ditemukan di director
 
 # Travis
 Link Travis : https://travis-ci.com/milleniumactress/SIAModels
+[![Build Status](https://travis-ci.com/milleniumactress/SIAModels.svg?branch=master)](https://travis-ci.com/milleniumactress/SIAModels)
