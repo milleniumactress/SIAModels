@@ -25,7 +25,6 @@ public class AIF134471Test {
     @Test
     public void testConstructor() {
         MataKuliah m = new AIF134471();
-        assertEquals(this.matkul,m);
     }
     
     
