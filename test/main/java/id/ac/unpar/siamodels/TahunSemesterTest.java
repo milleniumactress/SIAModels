@@ -23,6 +23,14 @@ public class TahunSemesterTest {
     }
     
     /**
+     * Test constructor dari kelas TahunSemester yang dua parameter, yaitu tahun dan kode semester
+     */
+    @Test
+    public void testConstructorCharKodeSemester() {
+        TahunSemester ts = new TahunSemester(2016,'2');
+    }
+    
+    /**
      * Test constructor dari kelas TahunSemester yang dua parameter, dengan input semester ganjil
      */
     @Test
