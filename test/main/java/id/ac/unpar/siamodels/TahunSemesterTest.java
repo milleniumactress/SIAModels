@@ -27,7 +27,9 @@ public class TahunSemesterTest {
      */
     @Test
     public void testConstructorCharKodeSemester() {
-        TahunSemester ts = new TahunSemester(2016,'2');
+        TahunSemester ts = new TahunSemester(2016,'7');
+        Semester sm = ts.getSemester();
+        TahunSemester ts2 = new TahunSemester(2016,sm);
     }
     
     /**
