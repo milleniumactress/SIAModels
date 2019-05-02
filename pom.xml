@@ -52,8 +52,8 @@
                 </configuration>
             </plugin>
         </plugins>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>test/main/java</testSourceDirectory>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <testSourceDirectory>${basedir}/test/main/java</testSourceDirectory>
     </build>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
