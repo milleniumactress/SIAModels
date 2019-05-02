@@ -50,7 +50,7 @@ public class JadwalKuliahTest {
         MataKuliah mataKuliah = new AIF131101();
         JadwalKuliah instance = new JadwalKuliah();
         instance.setMataKuliah(mataKuliah);
-        MataKuliah expected = new AIF131101();
+        MataKuliah expected = mataKuliah;
         assertEquals(expected,instance.getMataKuliah());
     }
 
