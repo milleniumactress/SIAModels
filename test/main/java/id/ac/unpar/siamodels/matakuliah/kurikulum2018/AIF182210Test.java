@@ -15,7 +15,7 @@ public class AIF182210Test {
     
     @Test
     public void testCreate() {
-       new AIF182007();
+       new AIF182210();
     }
     
 }
