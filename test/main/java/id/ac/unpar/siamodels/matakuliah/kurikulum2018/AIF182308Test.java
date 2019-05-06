@@ -5,6 +5,11 @@
  */
 package id.ac.unpar.siamodels.matakuliah.kurikulum2018;
 
+import id.ac.unpar.siamodels.Mahasiswa;
+import id.ac.unpar.siamodels.TahunSemester;
+import java.util.LinkedList;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -15,7 +20,49 @@ public class AIF182308Test {
     
    @Test
     public void testCreate() {
-       new AIF182007();
+       new AIF182308();
+    }
+    
+    /*
+    *   Tes mahasiswa dapat mengambil matakuliah AIF182308
+    */
+    @Test
+    public void testCheckPrasyaratTrue() {
+        Mahasiswa mahasiswa = new Mahasiswa("2018730041");
+        List<String> reasonsContainer = new LinkedList<>();
+        AIF182111 instance = new AIF182111();
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF182101(), "B"));
+        boolean expResult = true;
+        boolean result = instance.checkPrasyarat(mahasiswa, reasonsContainer);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Tes mahasiswa tidak dapat mengambil matakuliah AIF182308 karena belum tempuh AIF182302
+     */
+    @Test
+    public void testCheckPrasyaratFalseTempuh() {
+        Mahasiswa mahasiswa = new Mahasiswa("2018730041");
+        List<String> reasonsContainer = new LinkedList<>();
+        AIF182308 instance = new AIF182308();
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF181105(), "A"));
+        boolean expResult = false;
+        boolean result = instance.checkPrasyarat(mahasiswa, reasonsContainer);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Tes mahasiswa tidak dapat mengambil matakuliah AIF182308 karena belum lulus AIF181105
+     */
+    @Test
+    public void testCheckPrasyaratFalseLulus() {
+        Mahasiswa mahasiswa = new Mahasiswa("2018730041");
+        List<String> reasonsContainer = new LinkedList<>();
+        AIF182308 instance = new AIF182308();
+        mahasiswa.getRiwayatNilai().add(new Mahasiswa.Nilai(new TahunSemester("182"), new AIF181105(), "E"));
+        boolean expResult = false;
+        boolean result = instance.checkPrasyarat(mahasiswa, reasonsContainer);
+        assertEquals(expResult, result);
     }
     
 }
