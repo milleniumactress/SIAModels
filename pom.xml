@@ -21,8 +21,11 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.6.201602180812</version>
                 <configuration>
-                    <destFile>${basedir}\jacoco.exec</destFile>
-                    <dataFile>${basedir}\jacoco.exec</dataFile>
+                    <destFile>${basedir}/jacoco.exec</destFile>
+                    <dataFile>${basedir}/jacoco.exec</dataFile>
+					<excludes>
+						<exclude>**/id/ac/unpar/siamodels/matakuliah/*</exclude>
+					</excludes>
                 </configuration>
                 <executions>
                     <execution>
@@ -49,8 +52,8 @@
                 </configuration>
             </plugin>
         </plugins>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>test/main/java</testSourceDirectory>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <testSourceDirectory>${basedir}/test/main/java</testSourceDirectory>
     </build>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -69,8 +72,11 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.6.201602180812</version>
                 <configuration>
-                    <destFile>${basedir}\jacoco.exec</destFile>
-                    <dataFile>${basedir}\jacoco.exec</dataFile>
+                    <destFile>${basedir}/jacoco.exec</destFile>
+                    <dataFile>${basedir}/jacoco.exec</dataFile>
+					<excludes>
+						<exclude>**/id/ac/unpar/siamodels/matakuliah/*</exclude>
+					</excludes>
                 </configuration>
             </plugin>
             <plugin>
