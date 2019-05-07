@@ -30,5 +30,32 @@ public class NilaiTest {
         assertEquals(expResult, result, 0.0);
     }
     
+    /**
+     * Tes menghitung Indeks Prestasi (IP) yang telah ditempuh dan semuanya lulus.
+     */
+    @Test
+    public void testCalculateIPKTempuh() {
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"A"));//6
+        double expResult = 4.0;
+        double result = instance.calculateIPKTempuh(lulusSaja);
+        assertEquals(expResult, result, 0.0);
+
+    }
+    
+    /**
+     * Tes untuk mengambil angka akhir dari inner class Nilai.
+     */
+    @Test
+    public void getAngkaAkhir() {
+        boolean lulusSaja = true;
+        Mahasiswa instance = new Mahasiswa("2016730041");
+        instance.riwayatNilai.add(new Mahasiswa.Nilai(new TahunSemester("161"), new AIF131101(),"K"));//6
+        double expResult = Double.NaN;
+        Nilai nilai = instance.riwayatNilai.get(0);
+        assertEquals(nilai.getAngkaAkhir(), nilai.getAngkaAkhir());
+        
+    }
     
 }
