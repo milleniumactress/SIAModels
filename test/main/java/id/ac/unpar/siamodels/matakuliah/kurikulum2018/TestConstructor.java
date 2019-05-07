@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Gerry
+ * @author Ravi
  */
 public class TestConstructor {
 
@@ -736,4 +736,7 @@ public class TestConstructor {
         boolean result = instance.checkPrasyarat(mahasiswa, reasonsContainer);
         assertEquals(expResult, result);
     }
+    
+
+
 }
